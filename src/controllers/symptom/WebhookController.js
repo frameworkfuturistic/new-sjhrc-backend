@@ -5,7 +5,7 @@ const NotificationService = require('../../services/notificationService');
 const logger = require('../../utils/logger');
 const { mysqlPool } = require('../../config/database');
 
-class WebhookController {
+class webhookController {
   async handlePaymentWebhook(req, res) {
     const signature = req.headers['x-razorpay-signature'];
     const body = req.body;
@@ -148,4 +148,4 @@ class WebhookController {
   }
 }
 
-module.exports = new WebhookController();
+module.exports = new webhookController();
