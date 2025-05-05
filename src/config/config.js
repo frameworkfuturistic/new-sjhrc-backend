@@ -57,16 +57,22 @@ module.exports = {
   },
   // Whatsapp Cloud API configuration
   whatsapp: {
-    accessToken:
-      process.env.WHATSAPP_ACCESS_TOKEN ||
-      'YOUR_WHATSAPP_CLOUD_API_ACCESS_TOKEN',
-    phoneNumberId:
-      process.env.WHATSAPP_PHONE_NUMBER_ID || 'YOUR_PHONE_NUMBER_ID',
-    businessAccountId:
-      process.env.WHATSAPP_BUSINESS_ACCOUNT_ID || 'YOUR_BUSINESS_ACCOUNT_ID',
-    webhookVerifyToken:
-      process.env.WHATSAPP_WEBHOOK_VERIFY_TOKEN || 'YOUR_WEBHOOK_VERIFY_TOKEN',
-    apiVersion: process.env.WHATSAPP_API_VERSION || 'v22.0',
+    accessToken: process.env.WHATSAPP_ACCESS_TOKEN,
+    phoneNumberId: process.env.WHATSAPP_PHONE_NUMBER_ID,
+    businessAccountId: process.env.WHATSAPP_BUSINESS_ACCOUNT_ID,
+    webhook: {
+      verifyToken: process.env.WHATSAPP_WEBHOOK_VERIFY_TOKEN,
+      path: '/webhook/whatsapp', // Customize
+      version: process.env.WHATSAPP_API_VERSION || 'v18.0',
+    },
+    // Default message parameters
+    defaults: {
+      language: {
+        code: 'en',
+        policy: 'deterministic',
+      },
+      timeout: 10000, // ms
+    },
   },
 
   hospital: {

@@ -71,7 +71,7 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 // Routes
-app.get('/health', async (req, res) => {
+app.get('/', async (req, res) => {
   const healthcheck = {
     uptime: process.uptime(),
     message: 'OK',

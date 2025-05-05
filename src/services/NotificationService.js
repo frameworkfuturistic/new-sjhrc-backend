@@ -4,84 +4,296 @@ const config = require('../config/config');
 
 class NotificationService {
   constructor() {
-    if (!config.whatsapp.accessToken || !config.whatsapp.phoneNumberId) {
-      throw new Error('WhatsApp Cloud API configuration missing');
-    }
+    this._validateConfig();
+    this._initializeService();
+    this._setupCircuitBreaker();
+  }
 
-    this.apiVersion = config.whatsapp.apiVersion;
+  // ==================== INITIALIZATION ====================
+  _initializeService() {
+    this.apiVersion = config.whatsapp.apiVersion || 'v22.0';
     this.baseUrl = `https://graph.facebook.com/${this.apiVersion}/${config.whatsapp.phoneNumberId}/messages`;
     this.headers = {
       Authorization: `Bearer ${config.whatsapp.accessToken}`,
       'Content-Type': 'application/json',
     };
+    this.rateLimiter = {
+      lastRequest: 0,
+      minInterval: 200, // 5 requests per second
+    };
   }
 
-  /**
-   * Validate notification data before sending
-   */
-  _validateNotificationData(data) {
-    if (!data?.mobileNo) {
-      throw new Error('Missing mobile number');
+  _setupCircuitBreaker() {
+    this.circuitBreaker = {
+      isOpen: false,
+      lastFailure: 0,
+      failureCount: 0,
+      resetAfter: 60000, // 1 minute
+      threshold: 3, // Max failures before tripping
+    };
+  }
+
+  // ==================== CONFIG VALIDATION ====================
+  _validateConfig() {
+    const { whatsapp } = config;
+
+    if (!whatsapp?.accessToken) {
+      throw new Error('WhatsApp access token is required');
     }
-    if (!data.appointmentId) {
-      logger.warn('Notification sent without appointment ID');
+
+    if (!whatsapp?.phoneNumberId) {
+      throw new Error('WhatsApp phone number ID is required');
+    }
+
+    if (!/^EA[A-Za-z0-9]{180,}$/.test(whatsapp.accessToken)) {
+      throw new Error('Invalid WhatsApp access token format');
+    }
+
+    if (!/^\d+$/.test(whatsapp.phoneNumberId)) {
+      throw new Error('Invalid WhatsApp phone number ID format');
     }
   }
 
-  /**
-   * Core method to send WhatsApp message with enhanced validation
-   */
-  async _sendWhatsAppMessage(phoneNumber, messagePayload) {
+  // ==================== CIRCUIT BREAKER ====================
+  _checkCircuitBreaker() {
+    if (this.circuitBreaker.isOpen) {
+      const now = Date.now();
+      if (
+        now - this.circuitBreaker.lastFailure >
+        this.circuitBreaker.resetAfter
+      ) {
+        this._resetCircuitBreaker();
+        return false;
+      }
+      throw new Error(
+        'WhatsApp API temporarily unavailable (circuit breaker open)'
+      );
+    }
+  }
+
+  _handleApiFailure() {
+    this.circuitBreaker.failureCount++;
+    this.circuitBreaker.lastFailure = Date.now();
+
+    if (this.circuitBreaker.failureCount >= this.circuitBreaker.threshold) {
+      this.circuitBreaker.isOpen = true;
+      logger.error(
+        'Circuit breaker tripped - WhatsApp API failures exceeded threshold'
+      );
+    }
+  }
+
+  _resetCircuitBreaker() {
+    this.circuitBreaker.isOpen = false;
+    this.circuitBreaker.failureCount = 0;
+    logger.info('Circuit breaker reset');
+  }
+
+  // ==================== RATE LIMITING ====================
+  async _enforceRateLimit() {
+    const now = Date.now();
+    const elapsed = now - this.rateLimiter.lastRequest;
+
+    if (elapsed < this.rateLimiter.minInterval) {
+      const delay = this.rateLimiter.minInterval - elapsed;
+      await new Promise((resolve) => setTimeout(resolve, delay));
+    }
+
+    this.rateLimiter.lastRequest = Date.now();
+  }
+
+  // ==================== CORE FUNCTIONALITY ====================
+  async _sendWhatsAppMessage(phoneNumber, messagePayload, retryCount = 0) {
     try {
-      // Add validation for phone number format
-      if (!/^91\d{10}$/.test(phoneNumber)) {
-        throw new Error(`Invalid phone number format: ${phoneNumber}`);
-      }
+      await this._enforceRateLimit();
+      this._checkCircuitBreaker();
 
-      // Log the full payload in development
-      if (process.env.NODE_ENV === 'development') {
-        logger.debug('Sending WhatsApp payload:', {
-          payload: messagePayload,
-          phoneNumber,
-        });
-      }
+      const formattedNumber = this._formatPhoneNumber(phoneNumber);
+      const validatedPayload = this._validateMessagePayload(messagePayload);
 
-      const response = await axios.post(this.baseUrl, messagePayload, {
+      const response = await axios.post(this.baseUrl, validatedPayload, {
         headers: this.headers,
-        timeout: 10000, // 10 second timeout
+        timeout: 10000,
       });
 
-      logger.info(`WhatsApp message sent to ${phoneNumber}`, {
-        messageId: response.data.messages[0].id,
-        template: messagePayload.template?.name,
+      logger.info(`Message sent to ${formattedNumber}`, {
+        messageId: response.data?.messages?.[0]?.id,
+        template: validatedPayload.template?.name,
       });
 
       return response.data;
     } catch (error) {
-      const errorDetails = {
-        status: error.response?.status,
-        error: error.response?.data?.error || error.message,
+      this._handleApiFailure();
+      return this._handleSendError(
+        error,
         phoneNumber,
-        template: messagePayload.template?.name,
+        messagePayload,
+        retryCount
+      );
+    }
+  }
+
+  _handleSendError(error, phoneNumber, messagePayload, retryCount) {
+    const errorDetails = {
+      status: error.response?.status,
+      error: error.response?.data?.error || error.message,
+      phoneNumber,
+      template: messagePayload.template?.name,
+      retryCount,
+    };
+
+    // Retry for 5xx errors (max 2 retries)
+    if (error.response?.status >= 500 && retryCount < 2) {
+      const delay = 1000 * (retryCount + 1); // Exponential backoff
+      logger.warn(`Retrying failed request (attempt ${retryCount + 1})`);
+      return new Promise((resolve) =>
+        setTimeout(
+          () =>
+            resolve(
+              this._sendWhatsAppMessage(
+                phoneNumber,
+                messagePayload,
+                retryCount + 1
+              )
+            ),
+          delay
+        )
+      );
+    }
+
+    logger.error('WhatsApp API request failed:', errorDetails);
+    throw this._formatError(error);
+  }
+
+  _formatError(error) {
+    if (error.response?.status === 401) {
+      return new Error(
+        'WhatsApp API authorization failed. ' +
+          'Please verify your access token and phone number ID are correct and not expired.'
+      );
+    }
+    return error;
+  }
+
+  // ==================== DATA VALIDATION ====================
+  _validateNotificationData(data) {
+    const mobileNo = this._extractMobileNumber(data);
+
+    if (!mobileNo) {
+      logger.error('Mobile number missing in data:', data);
+      throw new Error('Mobile number is required');
+    }
+
+    if (!/^[6-9]\d{9}$/.test(mobileNo)) {
+      throw new Error(`Invalid Indian mobile number format: ${mobileNo}`);
+    }
+
+    return `91${mobileNo}`;
+  }
+
+  _extractMobileNumber(data) {
+    const mobileNo = data?.mobileNo || data?.data?.mobileNo;
+    return mobileNo?.toString().replace(/\D/g, '');
+  }
+
+  _formatPhoneNumber(phoneNumber) {
+    const digits = phoneNumber.toString().replace(/\D/g, '');
+    return digits.startsWith('91') ? digits : `91${digits}`;
+  }
+
+  _validateMessagePayload(payload) {
+    if (
+      !payload?.messaging_product ||
+      payload.messaging_product !== 'whatsapp'
+    ) {
+      throw new Error('Invalid messaging product specified');
+    }
+    return payload;
+  }
+
+  // ==================== TEMPLATE BUILDERS ====================
+  async _sendTemplateMessage(templateName, data) {
+    try {
+      const mobileNo = this._validateNotificationData(data);
+      const components = this._buildTemplateComponents(templateName, data);
+
+      const messagePayload = {
+        messaging_product: 'whatsapp',
+        recipient_type: 'individual',
+        to: mobileNo,
+        type: 'template',
+        template: {
+          name: `${templateName}_v2`,
+          language: { code: 'en', policy: 'deterministic' },
+          components: components.filter((c) => c.parameters?.length > 0),
+        },
       };
 
-      // Include more details in development
-      if (process.env.NODE_ENV === 'development') {
-        errorDetails.payload = messagePayload;
-        errorDetails.config = {
-          url: this.baseUrl,
-          headers: { ...this.headers, Authorization: 'Bearer [REDACTED]' },
-        };
-      }
-
-      logger.error('WhatsApp API request failed:', errorDetails);
+      return await this._sendWhatsAppMessage(mobileNo, messagePayload);
+    } catch (error) {
+      logger.error(`Failed to send ${templateName} notification:`, error);
       throw error;
     }
   }
 
-  /**
-   * Safe date formatting with fallback
-   */
+  _buildTemplateComponents(templateName, data) {
+    const templateConfig = {
+      appointment_confirmed: {
+        header: '✅ Appointment Confirmed',
+        body: [
+          data.patientName || 'Patient',
+          data.consultantName || 'Doctor',
+          data.appointmentId || 'N/A',
+          this._formatDate(data.date),
+          data.time || 'Not specified',
+          data.location || config.hospital?.defaultLocation || 'Our Clinic',
+        ],
+        buttons: data.appointmentId
+          ? [
+              { action: 'get_directions', id: data.appointmentId },
+              { action: 'reschedule', id: data.appointmentId },
+            ]
+          : [],
+      },
+      // Other templates...
+    };
+
+    const components = [
+      {
+        type: 'header',
+        parameters: [
+          { type: 'text', text: templateConfig[templateName].header },
+        ],
+      },
+      {
+        type: 'body',
+        parameters: templateConfig[templateName].body
+          .filter((text) => text !== undefined)
+          .map((text) => ({ type: 'text', text })),
+      },
+    ];
+
+    // Add buttons if available
+    templateConfig[templateName].buttons.forEach((btn, index) => {
+      components.push({
+        type: 'button',
+        sub_type: 'quick_reply',
+        index,
+        parameters: [
+          {
+            type: 'payload',
+            payload: JSON.stringify({
+              action: btn.action,
+              id: btn.id,
+            }),
+          },
+        ],
+      });
+    });
+
+    return components;
+  }
+
   _formatDate(dateString) {
     try {
       if (!dateString) return 'Not specified';
@@ -99,338 +311,26 @@ class NotificationService {
     }
   }
 
-  /**
-   * Appointment Confirmed Notification with robust error handling
-   */
+  // ==================== PUBLIC METHODS ====================
   async sendAppointmentConfirmed(data) {
-    try {
-      this._validateNotificationData(data);
-
-      const components = [
-        {
-          type: 'header',
-          parameters: [{ type: 'text', text: '✅ Appointment Confirmed' }],
-        },
-        {
-          type: 'body',
-          parameters: [
-            { type: 'text', text: data.patientName || 'Patient' },
-            { type: 'text', text: data.consultantName || 'Doctor' },
-            { type: 'text', text: data.appointmentId || 'N/A' },
-            { type: 'text', text: this._formatDate(data.date) },
-            { type: 'text', text: data.time || 'Not specified' },
-            {
-              type: 'text',
-              text:
-                data.location ||
-                config.hospital?.defaultLocation ||
-                'Our Clinic',
-            },
-          ].filter((p) => p.text), // Remove any empty parameters
-        },
-      ];
-
-      // Add buttons only if we have required data
-      if (data.appointmentId) {
-        components.push(
-          {
-            type: 'button',
-            sub_type: 'quick_reply',
-            index: 0,
-            parameters: [
-              {
-                type: 'payload',
-                payload: JSON.stringify({
-                  action: 'get_directions',
-                  id: data.appointmentId,
-                }),
-              },
-            ],
-          },
-          {
-            type: 'button',
-            sub_type: 'quick_reply',
-            index: 1,
-            parameters: [
-              {
-                type: 'payload',
-                payload: JSON.stringify({
-                  action: 'reschedule',
-                  id: data.appointmentId,
-                }),
-              },
-            ],
-          }
-        );
-
-        if (config.hospital?.portalUrl) {
-          components.push({
-            type: 'button',
-            sub_type: 'url',
-            index: 2,
-            parameters: [
-              {
-                type: 'text',
-                text: `${config.hospital.portalUrl}/appointments/${data.appointmentId}`,
-              },
-            ],
-          });
-        }
-      }
-
-      const messagePayload = {
-        messaging_product: 'whatsapp',
-        recipient_type: 'individual',
-        to: `91${data.mobileNo}`,
-        type: 'template',
-        template: {
-          name: 'appointment_confirmed_v2',
-          language: { code: 'en', policy: 'deterministic' },
-          components: components.filter((c) => c.parameters?.length > 0),
-        },
-      };
-
-      return await this._sendWhatsAppMessage(
-        `91${data.mobileNo}`,
-        messagePayload
-      );
-    } catch (error) {
-      logger.error('Failed to prepare appointment confirmation:', error);
-      throw error;
-    }
+    return this._sendTemplateMessage('appointment_confirmed', data);
   }
 
-  /**
-   * Payment Success Notification with robust error handling
-   */
   async sendPaymentSuccess(data) {
-    try {
-      this._validateNotificationData(data);
-
-      if (!data.amount) {
-        throw new Error('Missing payment amount');
-      }
-
-      const components = [
-        {
-          type: 'header',
-          parameters: [{ type: 'text', text: '💰 Payment Received' }],
-        },
-        {
-          type: 'body',
-          parameters: [
-            { type: 'text', text: data.patientName || 'Patient' },
-            { type: 'text', text: `₹${data.amount}` },
-            { type: 'text', text: data.appointmentId || 'N/A' },
-            { type: 'text', text: data.paymentId || 'N/A' },
-          ].filter((p) => p.text),
-        },
-      ];
-
-      // Add buttons only if we have required data
-      if (data.paymentId) {
-        components.push({
-          type: 'button',
-          sub_type: 'quick_reply',
-          index: 0,
-          parameters: [
-            {
-              type: 'payload',
-              payload: JSON.stringify({
-                action: 'view_receipt',
-                id: data.paymentId,
-              }),
-            },
-          ],
-        });
-
-        if (config.hospital?.portalUrl) {
-          components.push({
-            type: 'button',
-            sub_type: 'url',
-            index: 1,
-            parameters: [
-              {
-                type: 'text',
-                text: `${config.hospital.portalUrl}/receipts/${data.paymentId}`,
-              },
-            ],
-          });
-        }
-      }
-
-      const messagePayload = {
-        messaging_product: 'whatsapp',
-        recipient_type: 'individual',
-        to: `91${data.mobileNo}`,
-        type: 'template',
-        template: {
-          name: 'payment_successful_v2',
-          language: { code: 'en', policy: 'deterministic' },
-          components: components.filter((c) => c.parameters?.length > 0),
-        },
-      };
-
-      return await this._sendWhatsAppMessage(
-        `91${data.mobileNo}`,
-        messagePayload
-      );
-    } catch (error) {
-      logger.error('Failed to prepare payment confirmation:', error);
-      throw error;
-    }
+    if (!data.amount) throw new Error('Payment amount is required');
+    return this._sendTemplateMessage('payment_successful', data);
   }
 
-  /**
-   * Appointment Reminder Notification (Enhanced)
-   */
-  async sendAppointmentReminder(data) {
-    const messagePayload = {
-      messaging_product: 'whatsapp',
-      recipient_type: 'individual',
-      to: `91${data.mobileNo}`,
-      type: 'template',
-      template: {
-        name: 'appointment_reminder_v2',
-        language: { code: 'en', policy: 'deterministic' },
-        components: [
-          {
-            type: 'header',
-            parameters: [
-              {
-                type: 'text',
-                text: '⏰ Appointment Reminder',
-              },
-            ],
-          },
-          {
-            type: 'body',
-            parameters: [
-              { type: 'text', text: data.patientName },
-              { type: 'text', text: data.consultantName },
-              { type: 'text', text: this._formatDate(data.date) },
-              { type: 'text', text: data.time },
-              {
-                type: 'text',
-                text: data.location || config.hospital.defaultLocation,
-              },
-            ],
-          },
-          {
-            type: 'button',
-            sub_type: 'quick_reply',
-            index: 0,
-            parameters: [
-              {
-                type: 'payload',
-                payload: JSON.stringify({
-                  action: 'confirm_attendance',
-                  id: data.appointmentId,
-                }),
-              },
-            ],
-          },
-          {
-            type: 'button',
-            sub_type: 'quick_reply',
-            index: 1,
-            parameters: [
-              {
-                type: 'payload',
-                payload: JSON.stringify({
-                  action: 'reschedule',
-                  id: data.appointmentId,
-                }),
-              },
-            ],
-          },
-        ],
-      },
-    };
-
-    return this._sendWhatsAppMessage(`91${data.mobileNo}`, messagePayload);
-  }
-
-  /**
-   * Appointment Cancelled Notification (Enhanced)
-   */
-  async sendAppointmentCancelled(data) {
-    const messagePayload = {
-      messaging_product: 'whatsapp',
-      recipient_type: 'individual',
-      to: `91${data.mobileNo}`,
-      type: 'template',
-      template: {
-        name: 'appointment_cancelled_v2',
-        language: { code: 'en', policy: 'deterministic' },
-        components: [
-          {
-            type: 'header',
-            parameters: [
-              {
-                type: 'text',
-                text: '❌ Appointment Cancelled',
-              },
-            ],
-          },
-          {
-            type: 'body',
-            parameters: [
-              { type: 'text', text: data.patientName },
-              { type: 'text', text: data.consultantName },
-              { type: 'text', text: data.appointmentId },
-              { type: 'text', text: this._formatDate(data.date) },
-              { type: 'text', text: data.time },
-            ],
-          },
-          ...(data.refundAmount
-            ? [
-                {
-                  type: 'footer',
-                  parameters: [
-                    {
-                      type: 'text',
-                      text: `A refund of ₹${data.refundAmount} will be processed within 5-7 business days.`,
-                    },
-                  ],
-                },
-              ]
-            : []),
-          {
-            type: 'button',
-            sub_type: 'quick_reply',
-            index: 0,
-            parameters: [
-              {
-                type: 'payload',
-                payload: JSON.stringify({
-                  action: 'rebook',
-                  consultantId: data.consultantId,
-                }),
-              },
-            ],
-          },
-        ],
-      },
-    };
-
-    return this._sendWhatsAppMessage(`91${data.mobileNo}`, messagePayload);
-  }
-
-  /**
-   * Custom Interactive Message
-   */
   async sendInteractiveMessage(phoneNumber, messageData) {
-    const messagePayload = {
+    const validatedNumber = this._formatPhoneNumber(phoneNumber);
+    const payload = {
       messaging_product: 'whatsapp',
       recipient_type: 'individual',
-      to: `91${phoneNumber}`,
+      to: validatedNumber,
       type: 'interactive',
       interactive: {
         type: 'button',
-        body: {
-          text: messageData.text,
-        },
+        body: { text: messageData.text },
         action: {
           buttons: messageData.buttons.map((btn, index) => ({
             type: 'reply',
@@ -442,8 +342,27 @@ class NotificationService {
         },
       },
     };
+    return this._sendWhatsAppMessage(validatedNumber, payload);
+  }
 
-    return this._sendWhatsAppMessage(`91${phoneNumber}`, messagePayload);
+  async healthCheck() {
+    try {
+      const response = await axios.get(
+        `https://graph.facebook.com/${this.apiVersion}/${config.whatsapp.phoneNumberId}`,
+        { headers: this.headers, timeout: 5000 }
+      );
+      return {
+        healthy: true,
+        status: response.status,
+        data: response.data,
+      };
+    } catch (error) {
+      return {
+        healthy: false,
+        error: error.response?.data?.error || error.message,
+        status: error.response?.status,
+      };
+    }
   }
 }
 

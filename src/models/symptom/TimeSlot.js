@@ -131,6 +131,116 @@ class TimeSlot {
   }
 
   /**
+   * Get all slots with their appointments and additional filters
+   * @param {Object} filters - Filter options
+   * @param {string} [filters.date] - Filter by specific date (YYYY-MM-DD)
+   * @param {number} [filters.consultantId] - Filter by consultant ID
+   * @param {number} [filters.departmentId] - Filter by department ID
+   * @returns {Promise<Array>} Array of filtered slots with appointment data
+   */
+  static async findAllWithAppointments(filters = {}) {
+    try {
+      let query = `
+      SELECT 
+        s.*, 
+        a.AppointmentID AS 'appointment.AppointmentID',
+        a.MRNo AS 'appointment.MRNo',
+        a.PatientName AS 'appointment.PatientName',
+        a.MobileNo AS 'appointment.MobileNo',
+        a.Status AS 'appointment.Status',
+        a.ConsultationDate AS 'appointment.ConsultationDate',
+        a.CreatedAt AS 'appointment.CreatedAt',
+        a.PaymentStatus AS 'appointment.PaymentStatus',
+        a.PaymentDate AS 'appointment.PaymentDate',
+        a.CancelledAt AS 'appointment.CancelledAt',
+        c.DepartmentID AS 'consultant.DepartmentID',
+        d.Department AS 'department.Department'
+      FROM ${this.tableName} s
+      LEFT JOIN opd_onlineappointments a ON s.SlotID = a.SlotID
+      LEFT JOIN gen_consultants c ON s.ConsultantID = c.ConsultantID
+      LEFT JOIN gen_departments d ON c.DepartmentID = d.DepartmentID
+      WHERE s.IsActive = TRUE
+    `;
+
+      const params = [];
+
+      // Add filters
+      if (filters.date) {
+        query += ' AND DATE(s.SlotDate) = ?';
+        params.push(filters.date);
+      }
+
+      if (filters.consultantId) {
+        query += ' AND s.ConsultantID = ?';
+        params.push(filters.consultantId);
+      }
+
+      if (filters.departmentId) {
+        query += ' AND c.DepartmentID = ?';
+        params.push(filters.departmentId);
+      }
+
+      query += ' ORDER BY s.SlotDate, s.SlotTime';
+
+      const [slots] = await mysqlPool.query(query, params);
+
+      return slots.map((row) => {
+        const slot = { ...row };
+
+        // Extract appointment data
+        if (row['appointment.AppointmentID']) {
+          slot.appointment = {
+            AppointmentID: row['appointment.AppointmentID'],
+            MRNo: row['appointment.MRNo'],
+            PatientName: row['appointment.PatientName'],
+            MobileNo: row['appointment.MobileNo'],
+            Status: row['appointment.Status'],
+            ConsultationDate: row['appointment.ConsultationDate'],
+            CreatedAt: row['appointment.CreatedAt'],
+            PaymentStatus: row['appointment.PaymentStatus'],
+            PaymentDate: row['appointment.PaymentDate'],
+            CancelledAt: row['appointment.CancelledAt'],
+          };
+        }
+
+        // Extract consultant and department data
+        slot.consultant = {
+          DepartmentID: row['consultant.DepartmentID'],
+        };
+
+        slot.department = {
+          Department: row['department.Department'],
+        };
+
+        // Clean up the slot object
+        [
+          'appointment.AppointmentID',
+          'appointment.MRNo',
+          'appointment.PatientName',
+          'appointment.MobileNo',
+          'appointment.Status',
+          'appointment.ConsultationDate',
+          'appointment.CreatedAt',
+          'appointment.PaymentStatus',
+          'appointment.PaymentDate',
+          'appointment.CancelledAt',
+          'consultant.DepartmentID',
+          'department.Department',
+        ].forEach((field) => delete slot[field]);
+
+        return slot;
+      });
+    } catch (error) {
+      logger.error('Error fetching slots with appointments:', {
+        error: error.message,
+        query,
+        params,
+      });
+      throw error;
+    }
+  }
+
+  /**
    * Reserve a slot
    * @param {number} slotId
    * @param {number} appointmentId

@@ -1,7 +1,7 @@
 const Appointment = require('../../models/symptom/Appointment');
 const Consultant = require('../../models/symptom/Consultant');
 const RazorpayService = require('../../services/RazorpayService');
-const NotificationService = require('../../services/NotificationService');
+// const NotificationService = require('../../services/notificationService');
 
 const logger = require('../../utils/logger');
 const { mysqlPool } = require('../../config/database');
@@ -159,42 +159,42 @@ class PaymentController {
       // await connection.commit();
 
       // 6. Send confirmation (async)
-      const notificationData = {
-        appointmentId: appointment.AppointmentID,
-        patientName: appointment.PatientName,
-        consultantName: appointment.ConsultantName,
-        date: appointment.SlotDate,
-        time: appointment.SlotTime,
-        amount: payment.amount / 100,
-        mobileNo: appointment.MobileNo,
-        location: config.hospital?.defaultLocation,
-        paymentId: paymentId,
-        consultantId: appointment.ConsultantID,
-      };
+      // const notificationData = {
+      //   appointmentId: appointment.AppointmentID,
+      //   patientName: appointment.PatientName,
+      //   consultantName: appointment.ConsultantName,
+      //   date: appointment.SlotDate,
+      //   time: appointment.SlotTime,
+      //   amount: payment.amount / 100,
+      //   mobileNo: appointment.MobileNo,
+      //   location: config.hospital?.defaultLocation,
+      //   paymentId: paymentId,
+      //   consultantId: appointment.ConsultantID,
+      // };
 
-      console.log('Notification data:', notificationData);
+      // console.log('Notification data:', notificationData);
 
-      // Validate critical fields
-      if (!notificationData.mobileNo) {
-        throw new Error('Patient mobile number is required for notifications');
-      }
+      // // Validate critical fields
+      // if (!notificationData.mobileNo) {
+      //   throw new Error('Patient mobile number is required for notifications');
+      // }
 
-      const notificationService = new NotificationService();
+      // const notificationService = new NotificationService();
 
-      // Send notifications with proper error handling
-      await Promise.allSettled([
-        notificationService
-          .sendAppointmentConfirmed(notificationData)
-          .then(() => logger.info('Appointment confirmation sent'))
-          .catch((err) =>
-            logger.error('Appointment confirmation failed:', err)
-          ),
+      // // Send notifications with proper error handling
+      // await Promise.allSettled([
+      //   notificationService
+      //     .sendAppointmentConfirmed(notificationData)
+      //     .then(() => logger.info('Appointment confirmation sent'))
+      //     .catch((err) =>
+      //       logger.error('Appointment confirmation failed:', err)
+      //     ),
 
-        notificationService
-          .sendPaymentSuccess(notificationData)
-          .then(() => logger.info('Payment confirmation sent'))
-          .catch((err) => logger.error('Payment confirmation failed:', err)),
-      ]);
+      //   notificationService
+      //     .sendPaymentSuccess(notificationData)
+      //     .then(() => logger.info('Payment confirmation sent'))
+      //     .catch((err) => logger.error('Payment confirmation failed:', err)),
+      // ]);
 
       await connection.commit();
       res.status(200).json({

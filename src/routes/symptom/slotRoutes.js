@@ -30,6 +30,7 @@ router.post(
 
 // Get all slots (admin)
 router.get('/', slotController.getAllSlots);
+router.get('/appointments', slotController.getSlotsWithAppointments);
 
 // Get all slots for a specific doctor
 router.get(

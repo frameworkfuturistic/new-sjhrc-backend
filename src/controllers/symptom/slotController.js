@@ -467,3 +467,104 @@ exports.getAllSlots = async (req, res) => {
     });
   }
 };
+
+/**
+ * @desc    Get slots with appointment data (filterable)
+ * @route   GET /api/slots
+ * @access  Private/Admin
+ * @param {Object} req.query - Filter options
+ * @param {string} [req.query.date] - Filter by date (YYYY-MM-DD)
+ * @param {number} [req.query.consultantId] - Filter by consultant ID
+ * @param {number} [req.query.departmentId] - Filter by department ID
+ */
+exports.getSlotsWithAppointments = async (req, res) => {
+  try {
+    // Extract and validate filters from query params
+    const { date, consultantId, departmentId } = req.query;
+    const filters = {};
+
+    if (date && !moment(date, 'YYYY-MM-DD', true).isValid()) {
+      return res.status(400).json({
+        success: false,
+        message: 'Invalid date format. Use YYYY-MM-DD',
+      });
+    }
+
+    if (date) filters.date = date;
+    if (consultantId) filters.consultantId = parseInt(consultantId);
+    if (departmentId) filters.departmentId = parseInt(departmentId);
+
+    // Get filtered slots
+    const slots = await TimeSlot.findAllWithAppointments(filters);
+
+    if (!slots || slots.length === 0) {
+      return res.status(200).json({
+        success: true,
+        data: [],
+        message: 'No slots found for the given filters',
+      });
+    }
+
+    // Format dates and structure response
+    const formattedSlots = slots.map((slot) => ({
+      ...slot,
+      SlotDate: formatDateToLocal(slot.SlotDate),
+      CreatedAt: formatDateToLocal(slot.CreatedAt),
+      UpdatedAt: formatDateToLocal(slot.UpdatedAt),
+      appointment: slot.appointment
+        ? {
+            ...slot.appointment,
+            ConsultationDate: formatDateToLocal(
+              slot.appointment.ConsultationDate
+            ),
+            CreatedAt: formatDateToLocal(slot.appointment.CreatedAt),
+            PaymentDate: formatDateToLocal(slot.appointment.PaymentDate),
+            CancelledAt: formatDateToLocal(slot.appointment.CancelledAt),
+          }
+        : null,
+      // Include additional relations
+      consultant: slot.consultant,
+      department: slot.department,
+    }));
+
+    res.status(200).json({
+      success: true,
+      data: formattedSlots,
+      count: formattedSlots.length,
+      filters: Object.keys(filters).length > 0 ? filters : undefined,
+    });
+  } catch (error) {
+    logger.error('Error in getSlotsWithAppointments:', {
+      error: error.message,
+      stack: error.stack,
+      timestamp: new Date().toISOString(),
+      queryParams: req.query,
+    });
+
+    res.status(500).json({
+      success: false,
+      message: 'Failed to fetch slots data',
+      error:
+        process.env.NODE_ENV === 'development'
+          ? {
+              message: error.message,
+              ...(error.sql && { sql: error.sql }),
+            }
+          : undefined,
+    });
+  }
+};
+
+// Helper function for consistent date formatting
+function formatDateToLocal(date) {
+  if (!date) return null;
+  try {
+    return moment.utc(date).tz(APP_TIMEZONE).format('YYYY-MM-DDTHH:mm:ssZ');
+  } catch (error) {
+    logger.warn('Date formatting error:', {
+      inputDate: date,
+      error: error.message,
+    });
+    return null;
+  }
+}

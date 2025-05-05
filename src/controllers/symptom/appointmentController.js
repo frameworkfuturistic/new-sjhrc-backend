@@ -1,7 +1,7 @@
 const Appointment = require('../../models/symptom/Appointment');
 const TimeSlot = require('../../models/symptom/TimeSlot');
 const Consultant = require('../../models/symptom/Consultant');
-const NotificationService = require('../../services/NotificationService');
+// const NotificationService = require('../../services/notificationService');
 const logger = require('../../utils/logger');
 const { mysqlPool } = require('../../config/database');
 const { validationResult } = require('express-validator');
@@ -141,7 +141,7 @@ class AppointmentController {
       }
 
       // 2. Check cancellation eligibility
-      if (!['Pending', 'Confirmed'].includes(appointment.Status)) {
+      if (!['Pending', 'Confirmed', 'Scheduled'].includes(appointment.Status)) {
         await connection.rollback();
         return res.status(400).json({
           success: false,
@@ -236,30 +236,30 @@ class AppointmentController {
       await connection.commit();
 
       // 6. Send notifications
-      const notificationData = {
-        appointmentId: appointment.AppointmentID,
-        patientName: appointment.PatientName,
-        consultantName: appointment.ConsultantName,
-        date: appointment.ConsultationDate,
-        amount: appointment.AmountPaid,
-        refundStatus,
-        refundId: updateData.RefundID,
-        refundAmount: updateData.RefundAmount,
-      };
+      // const notificationData = {
+      //   appointmentId: appointment.AppointmentID,
+      //   patientName: appointment.PatientName,
+      //   consultantName: appointment.ConsultantName,
+      //   date: appointment.ConsultationDate,
+      //   amount: appointment.AmountPaid,
+      //   refundStatus,
+      //   refundId: updateData.RefundID,
+      //   refundAmount: updateData.RefundAmount,
+      // };
 
-      if (refundStatus === 'already_refunded') {
-        await NotificationService.sendPaymentNotification(
-          'refundAlreadyProcessed',
-          notificationData
-        );
-      } else if (refundDetails) {
-        await NotificationService.sendPaymentNotification(
-          'refundProcessed',
-          notificationData
-        );
-      } else {
-        await NotificationService.sendAppointmentCancelled(notificationData);
-      }
+      // if (refundStatus === 'already_refunded') {
+      //   await NotificationService.sendPaymentNotification(
+      //     'refundAlreadyProcessed',
+      //     notificationData
+      //   );
+      // } else if (refundDetails) {
+      //   await NotificationService.sendPaymentNotification(
+      //     'refundProcessed',
+      //     notificationData
+      //   );
+      // } else {
+      //   await NotificationService.sendAppointmentCancelled(notificationData);
+      // }
 
       return res.status(200).json({
         success: true,
@@ -314,7 +314,11 @@ class AppointmentController {
         }
 
         // 2. Check if appointment can be completed
-        if (appointment.Status !== 'Confirmed' || 'Scheduled') {
+        // if (appointment.Status !== 'Confirmed' || 'Scheduled')
+        if (
+          appointment.Status !== 'Confirmed' &&
+          appointment.Status !== 'Scheduled'
+        ) {
           await connection.rollback();
           return res.status(400).json({
             success: false,
@@ -343,19 +347,6 @@ class AppointmentController {
         }
 
         await connection.commit();
-
-        // 4. Send completion notification
-        // const consultant = await Consultant.findById(appointment.ConsultantID);
-        // NotificationService.sendAppointmentConfirmed({
-        //   appointmentId: appointment.AppointmentID,
-        //   patientName: appointment.PatientName,
-        //   mobileNo: appointment.MobileNo,
-        //   email: appointment.Email,
-        //   consultantName: consultant.ConsultantName,
-        //   date: appointment.ConsultationDate,
-        //   // diagnosis,
-        //   // prescription,
-        // }).catch((err) => logger.error('Notification error:', err));
 
         res.status(200).json({
           success: true,
@@ -400,9 +391,11 @@ class AppointmentController {
             message: 'Appointment not found',
           });
         }
-
-        // 2. Check if appointment can be scheduled
-        if (appointment.Status !== 'Confirmed') {
+        if (
+          appointment.Status !== 'Confirmed' &&
+          appointment.Status !== 'Scheduled'
+        ) {
+          // 2. Check if appointment can be scheduled
           await connection.rollback();
           return res.status(400).json({
             success: false,
@@ -477,23 +470,23 @@ class AppointmentController {
         await connection.commit();
 
         // 7. Send notification
-        try {
-          const consultant = await Consultant.findById(
-            appointment.ConsultantID
-          );
-          await NotificationService.sendAppointmentScheduled({
-            appointmentId: appointment.AppointmentID,
-            patientName: appointment.PatientName,
-            mobileNo: appointment.MobileNo,
-            email: appointment.Email,
-            consultantName: consultant.ConsultantName,
-            date: newSlot.SlotDate,
-            time: newSlot.SlotTime,
-            tokenNo: appointment.TokenNo,
-          });
-        } catch (notificationError) {
-          logger.error('Notification error:', notificationError);
-        }
+        // try {
+        //   const consultant = await Consultant.findById(
+        //     appointment.ConsultantID
+        //   );
+        //   await NotificationService.sendAppointmentScheduled({
+        //     appointmentId: appointment.AppointmentID,
+        //     patientName: appointment.PatientName,
+        //     mobileNo: appointment.MobileNo,
+        //     email: appointment.Email,
+        //     consultantName: consultant.ConsultantName,
+        //     date: newSlot.SlotDate,
+        //     time: newSlot.SlotTime,
+        //     tokenNo: appointment.TokenNo,
+        //   });
+        // } catch (notificationError) {
+        //   logger.error('Notification error:', notificationError);
+        // }
 
         res.status(200).json({
           success: true,
