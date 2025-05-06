@@ -25,14 +25,14 @@ app.use(hpp());
 app.use(cors(corsOptions));
 
 // Force HTTPS in production
-if (process.env.NODE_ENV === 'production') {
-  app.use((req, res, next) => {
-    if (req.headers['x-forwarded-proto'] !== 'https') {
-      return res.redirect(`https://${req.hostname}${req.url}`);
-    }
-    next();
-  });
-}
+// if (process.env.NODE_ENV === 'production') {
+//   app.use((req, res, next) => {
+//     if (req.headers['x-forwarded-proto'] !== 'https') {
+//       return res.redirect(`https://${req.hostname}${req.url}`);
+//     }
+//     next();
+//   });
+// }
 if (process.env.NODE_ENV !== 'test') {
   try {
     const setupCleanupJob = require('./config/CleanupJob');
