@@ -12,9 +12,9 @@ const connectDB = async () => {
     logger.info('MongoDB Connected...');
 
     // Test MySQL connection
-    // const connection = await mysqlPool.getConnection();
-    // connection.release();
-    // logger.info('MySQL Connected...');
+    const connection = await mysqlPool.getConnection();
+    connection.release();
+    logger.info('MySQL Connected...');
   } catch (err) {
     logger.error('Database connection error:', err);
     process.exit(1);
