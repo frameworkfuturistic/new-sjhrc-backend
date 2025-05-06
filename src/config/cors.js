@@ -2,7 +2,7 @@
 const cors = require('cors');
 
 const corsOptions = {
-  origin: ['http://localhost:3000', 'https://sjhrc.in/'], // Add the domains you want to allow
+  origin: ['http://localhost:3001', 'https://sjhrc.in/'], // Add the domains you want to allow
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Allowed HTTP methods
   allowedHeaders: ['Content-Type', 'Authorization'], // Allowed headers
   credentials: true, // Enable cookies and authorization headers for cross-origin requests
