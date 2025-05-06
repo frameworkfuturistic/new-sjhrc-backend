@@ -84,7 +84,7 @@ exports.availableSlots = async (req, res) => {
       return {
         SlotID: slot.SlotID,
         ConsultantID: slot.ConsultantID,
-        SlotDate: slotLocalDate,
+        SlotDate: date,   //slotLocalDate for get direct body
         SlotTime: slot.SlotTime,
         SlotEndTime: slot.SlotEndTime,
         AvailableSlots: slot.AvailableSlots,
