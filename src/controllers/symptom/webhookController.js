@@ -1,7 +1,7 @@
 const Appointment = require('../../models/symptom/Appointment');
 const Consultant = require('../../models/symptom/Consultant');
 const RazorpayService = require('../../services/RazorpayService');
-const NotificationService = require('../../services/notificationService');
+const NotificationService = require('../../services/NotificationService');
 const logger = require('../../utils/logger');
 const { mysqlPool } = require('../../config/database');
 
