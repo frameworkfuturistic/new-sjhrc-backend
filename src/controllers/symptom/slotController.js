@@ -275,11 +275,11 @@ exports.addSlotsDay = async (req, res) => {
         currentTime.format('YYYYMMDD') + currentTime.format('HHmm') + nanoid(4);
 
       // Store SlotDate as UTC start of day for proper date grouping
-<<<<<<< HEAD
+
       // const slotDateUTC = currentTime.clone().startOf('day').utc().toDate();
       const slotDateLocal = moment.tz(date, 'YYYY-MM-DD', APP_TIMEZONE).startOf('day');
       const slotDateUTC = slotDateLocal.utc().toDate(); // e.g., 2025-05-09 18:30:00 UTC for 2025-05-10 00:00:00 +05:30
-=======
+
 
       //11111111
       // const slotDateUTC = currentTime.clone().startOf('day').utc().toDate();
@@ -293,7 +293,7 @@ exports.addSlotsDay = async (req, res) => {
         .clone()
         .startOf('day')
         .format('YYYY-MM-DD');
->>>>>>> 7a67fc418ec000c1874e22bb8340d34928fdbf35
+
 
       
       slots.push({

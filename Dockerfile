@@ -8,10 +8,11 @@ WORKDIR /app
 COPY package.json package-lock.json ./
 
 # Install dependencies
-RUN npm install -g npm@11.3.0
+#RUN npm install -g npm@11.3.0
 
 RUN npm cache clean --force
-RUN npm install --production --legacy-peer-deps || cat /root/.npm/_logs/*.log
+#RUN npm install --production --legacy-peer-deps || cat /root/.npm/_logs/*.log
+RUN npm install 
 # Copy the rest of the application code to the working directory
 COPY . .
 
