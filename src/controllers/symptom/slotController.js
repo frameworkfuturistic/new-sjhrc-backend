@@ -44,11 +44,12 @@ const handleDateConversion = (date, time = null) => {
  * @route   GET /api/slots/:doctorId/:date
  * @access  Public
  */
+
 exports.availableSlots = async (req, res) => {
   try {
     const { doctorId, date } = req.params;
 
-    // Validate date format
+    // Validate date format (YYYY-MM-DD)
     if (!moment(date, 'YYYY-MM-DD', true).isValid()) {
       return res.status(400).json({
         success: false,
@@ -56,15 +57,8 @@ exports.availableSlots = async (req, res) => {
       });
     }
 
-    // Convert input date to start and end of day in application timezone, then to UTC
-    const startOfDay = moment.tz(date, APP_TIMEZONE).startOf('day');
-    const endOfDay = moment.tz(date, APP_TIMEZONE).endOf('day');
-
-    const slots = await TimeSlot.findAvailableSlots(
-      doctorId,
-      startOfDay.utc().toDate(),
-      endOfDay.utc().toDate()
-    );
+    // Directly query with the date string (no timezone conversion needed)
+    const slots = await TimeSlot.findAvailableSlots(doctorId, date);
 
     if (!slots || slots.length === 0) {
       return res.status(404).json({
@@ -73,27 +67,19 @@ exports.availableSlots = async (req, res) => {
       });
     }
 
-    // Format response with local date strings
-    const formattedSlots = slots.map((slot) => {
-      // Convert UTC SlotDate back to local timezone for display
-      const slotLocalDate = moment
-        .utc(slot.SlotDate)
-        .tz(APP_TIMEZONE)
-        .format('YYYY-MM-DD');
-
-      return {
-        SlotID: slot.SlotID,
-        ConsultantID: slot.ConsultantID,
-        SlotDate: date, //slotLocalDate for get direct body
-        SlotTime: slot.SlotTime,
-        SlotEndTime: slot.SlotEndTime,
-        AvailableSlots: slot.AvailableSlots,
-        MaxSlots: slot.MaxSlots,
-        Status: slot.Status,
-        SlotToken: slot.SlotToken,
-        IsBooked: slot.IsBooked,
-      };
-    });
+    // Format response (already in correct date format)
+    const formattedSlots = slots.map((slot) => ({
+      SlotID: slot.SlotID,
+      ConsultantID: slot.ConsultantID,
+      SlotDate: slot.SlotDate, // Use the exact date from database
+      SlotTime: slot.SlotTime,
+      SlotEndTime: slot.SlotEndTime,
+      AvailableSlots: slot.AvailableSlots,
+      MaxSlots: slot.MaxSlots,
+      Status: slot.Status,
+      SlotToken: slot.SlotToken,
+      IsBooked: slot.IsBooked,
+    }));
 
     res.status(200).json({
       success: true,
@@ -108,6 +94,82 @@ exports.availableSlots = async (req, res) => {
     });
   }
 };
+
+// exports.availableSlots = async (req, res) => {
+//   try {
+//     const { doctorId, date } = req.params;
+
+//     console.log('Lllll: ', date);
+//     // Validate date format
+//     if (!moment(date, 'YYYY-MM-DD', true).isValid()) {
+//       return res.status(400).json({
+//         success: false,
+//         message: 'Invalid date format. Use YYYY-MM-DD.',
+//       });
+//     }
+
+//     // Convert input date to start and end of day in application timezone, then to UTC
+//     const startOfDay = moment.tz(date, APP_TIMEZONE).startOf('day');
+//     const endOfDay = moment.tz(date, APP_TIMEZONE).endOf('day');
+
+//     const slots = await TimeSlot.findAvailableSlots(
+//       doctorId,
+//       startOfDay.utc().toDate(),
+//       endOfDay.utc().toDate()
+//     );
+
+//     console.log('Raw slots from DB:', slots);
+
+//     if (!slots || slots.length === 0) {
+//       return res.status(404).json({
+//         success: false,
+//         message: 'No available slots for the given date.',
+//       });
+//     }
+
+//     // Format response with local date strings
+//     const formattedSlots = slots.map((slot) => {
+//       // Convert UTC SlotDate back to local timezone for display
+//       const slotLocalDate = moment
+//         .utc(slot.SlotDate)
+//         .tz(APP_TIMEZONE)
+//         .format('YYYY-MM-DD');
+
+//       return {
+//         SlotID: slot.SlotID,
+//         ConsultantID: slot.ConsultantID,
+//         SlotDate: date, //slotLocalDate for get direct body
+//         SlotTime: slot.SlotTime,
+//         SlotEndTime: slot.SlotEndTime,
+//         AvailableSlots: slot.AvailableSlots,
+//         MaxSlots: slot.MaxSlots,
+//         Status: slot.Status,
+//         SlotToken: slot.SlotToken,
+//         IsBooked: slot.IsBooked,
+//       };
+//     });
+
+//     console.log('formattedSlots', formattedSlots);
+//     // Log timezone info
+//     console.log({
+//       APP_TIMEZONE,
+//       currentTime: moment().tz(APP_TIMEZONE).format(),
+//       dbTime: moment().format('YYYY-MM-DD HH:mm:ss'),
+//     });
+
+//     res.status(200).json({
+//       success: true,
+//       data: formattedSlots,
+//     });
+//   } catch (error) {
+//     logger.error('Error fetching available slots:', error);
+//     res.status(500).json({
+//       success: false,
+//       message: 'Failed to fetch available slots',
+//       error: process.env.NODE_ENV === 'development' ? error.message : undefined,
+//     });
+//   }
+// };
 
 /**
  * @desc    Add slots for a doctor on a specific day
