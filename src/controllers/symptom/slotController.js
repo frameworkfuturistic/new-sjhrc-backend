@@ -84,7 +84,7 @@ exports.availableSlots = async (req, res) => {
       return {
         SlotID: slot.SlotID,
         ConsultantID: slot.ConsultantID,
-        SlotDate: date,   //slotLocalDate for get direct body
+        SlotDate: date, //slotLocalDate for get direct body
         SlotTime: slot.SlotTime,
         SlotEndTime: slot.SlotEndTime,
         AvailableSlots: slot.AvailableSlots,
@@ -276,11 +276,6 @@ exports.addSlotsDay = async (req, res) => {
 
       // Store SlotDate as UTC start of day for proper date grouping
 
-      // const slotDateUTC = currentTime.clone().startOf('day').utc().toDate();
-      const slotDateLocal = moment.tz(date, 'YYYY-MM-DD', APP_TIMEZONE).startOf('day');
-      const slotDateUTC = slotDateLocal.utc().toDate(); // e.g., 2025-05-09 18:30:00 UTC for 2025-05-10 00:00:00 +05:30
-
-
       //11111111
       // const slotDateUTC = currentTime.clone().startOf('day').utc().toDate();
 
@@ -294,8 +289,6 @@ exports.addSlotsDay = async (req, res) => {
         .startOf('day')
         .format('YYYY-MM-DD');
 
-
-      
       slots.push({
         ConsultantID: consultant_id,
         SlotDate: slotDateUTC,
