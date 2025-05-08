@@ -84,7 +84,7 @@ exports.availableSlots = async (req, res) => {
       return {
         SlotID: slot.SlotID,
         ConsultantID: slot.ConsultantID,
-        SlotDate: date,   //slotLocalDate for get direct body
+        SlotDate: slotLocalDate,
         SlotTime: slot.SlotTime,
         SlotEndTime: slot.SlotEndTime,
         AvailableSlots: slot.AvailableSlots,
@@ -108,110 +108,6 @@ exports.availableSlots = async (req, res) => {
     });
   }
 };
-
-/**
- * @desc    Add slots for a doctor on a specific day
- * @route   POST /api/slots
- * @access  Private/Admin
- */
-// exports.addSlotsDay = async (req, res) => {
-//   const errors = validationResult(req);
-//   if (!errors.isEmpty()) {
-//     return res.status(400).json({
-//       success: false,
-//       errors: errors.array(),
-//     });
-//   }
-
-//   try {
-//     const {
-//       consultant_id,
-//       date,
-//       start_time,
-//       end_time,
-//       interval_minutes = 15,
-//       max_slots = 1,
-//     } = req.body;
-
-//     // Validate date format
-//     if (!moment(date, 'YYYY-MM-DD', true).isValid()) {
-//       return res.status(400).json({
-//         success: false,
-//         message: 'Invalid date format. Use YYYY-MM-DD.',
-//       });
-//     }
-
-//     // Parse input times without timezone conversion
-//     const startMoment = moment.tz(
-//       `${date} ${start_time}`,
-//       'YYYY-MM-DD HH:mm:ss',
-//       APP_TIMEZONE
-//     );
-//     const endMoment = moment.tz(
-//       `${date} ${end_time}`,
-//       'YYYY-MM-DD HH:mm:ss',
-//       APP_TIMEZONE
-//     );
-
-//     if (!startMoment.isValid() || !endMoment.isValid()) {
-//       return res.status(400).json({
-//         success: false,
-//         message: 'Invalid time format. Use HH:mm:ss.',
-//       });
-//     }
-
-//     if (startMoment.isSameOrAfter(endMoment)) {
-//       return res.status(400).json({
-//         success: false,
-//         message: 'Start time must be before end time.',
-//       });
-//     }
-
-//     const slots = [];
-//     let currentTime = startMoment.clone();
-
-//     while (currentTime.isBefore(endMoment)) {
-//       const slotEndTime = currentTime.clone().add(interval_minutes, 'minutes');
-//       if (slotEndTime.isAfter(endMoment)) break;
-
-//       // Generate unique slot token
-//       const slotToken =
-//         currentTime.format('YYYYMMDD') + currentTime.format('HHmm') + nanoid(4);
-
-//       // FIXED: Store the date as is without timezone conversion
-//       slots.push({
-//         ConsultantID: consultant_id,
-//         SlotDate: date, // Store the original date string
-//         SlotTime: currentTime.format('HH:mm:ss'),
-//         SlotEndTime: slotEndTime.format('HH:mm:ss'),
-//         MaxSlots: max_slots,
-//         AvailableSlots: max_slots,
-//         Status: 'Available',
-//         SlotToken: slotToken,
-//         IsBooked: false,
-//         IsActive: true,
-//       });
-
-//       currentTime.add(interval_minutes, 'minutes');
-//     }
-
-//     // Bulk create slots in database
-//     await TimeSlot.bulkCreate(slots);
-
-//     res.status(201).json({
-//       success: true,
-//       message: 'Slots created successfully.',
-//       data: slots,
-//     });
-//   } catch (error) {
-//     logger.error('Error adding day slots:', error);
-//     res.status(500).json({
-//       success: false,
-//       message: 'Failed to create slots',
-//       error: process.env.NODE_ENV === 'development' ? error.message : undefined,
-//     });
-//   }
-// };
 
 /**
  * @desc    Add slots for a doctor on a specific day
@@ -275,27 +171,8 @@ exports.addSlotsDay = async (req, res) => {
         currentTime.format('YYYYMMDD') + currentTime.format('HHmm') + nanoid(4);
 
       // Store SlotDate as UTC start of day for proper date grouping
-<<<<<<< HEAD
-      // const slotDateUTC = currentTime.clone().startOf('day').utc().toDate();
-      const slotDateLocal = moment.tz(date, 'YYYY-MM-DD', APP_TIMEZONE).startOf('day');
-      const slotDateUTC = slotDateLocal.utc().toDate(); // e.g., 2025-05-09 18:30:00 UTC for 2025-05-10 00:00:00 +05:30
-=======
+      const slotDateUTC = currentTime.clone().startOf('day').utc().toDate();
 
-      //11111111
-      // const slotDateUTC = currentTime.clone().startOf('day').utc().toDate();
-
-      //222222222
-      //       const localDate = currentTime.format("YYYY-MM-DD")
-      // const slotDateUTC = moment.tz(localDate, "YYYY-MM-DD", APP_TIMEZONE).utc().toDate()
-
-      //333333333
-      const slotDateUTC = currentTime
-        .clone()
-        .startOf('day')
-        .format('YYYY-MM-DD');
->>>>>>> 7a67fc418ec000c1874e22bb8340d34928fdbf35
-
-      
       slots.push({
         ConsultantID: consultant_id,
         SlotDate: slotDateUTC,
@@ -409,12 +286,6 @@ exports.addSlotsRange = async (req, res) => {
 
           // Store SlotDate as UTC start of day for proper date grouping
           const slotDateUTC = currentDate.clone().startOf('day').utc().toDate();
-
-          // const localDate = currentDate.format('YYYY-MM-DD');
-          // const slotDateUTC = moment
-          //   .tz(localDate, 'YYYY-MM-DD', APP_TIMEZONE)
-          //   .utc()
-          //   .toDate();
 
           slots.push({
             ConsultantID: consultant_id,
