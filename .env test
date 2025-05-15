@@ -1,0 +1,61 @@
+NODE_ENV=development
+# NODE_ENV=production
+PORT=5656
+
+# Test MongoDB connection string
+MONGODB_URI="mongodb+srv://singhaniaveeraj:FCyIKGAkLoejz2zs@cluster0.dcnnb.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+
+# Live MongoDB connection string
+# MONGODB_URI="mongodb+srv://itsjhrc:HKSXALNFMOx4hNIv@cluster0.lla7z.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+
+
+# MySQL connection details
+# DB_HOST=192.168.1.250
+# DB_PORT=3306
+# DB_DATABASE=production
+# DB_USERNAME=root
+# DB_PASSWORD="Murga2na#"
+
+# Test MySQL connection details
+DB_HOST=localhost
+DB_PORT=3307
+DB_DATABASE=sjhrc_development
+DB_USERNAME=root
+DB_PASSWORD="171055"
+
+
+JWT_SECRET=yourSuperSecretKey
+HASHED_ADMIN_PASSWORD=$2a$10$X3DnCuIKCJj4YCZk5ytMJezpZY0kpNDtv9xW5e/UJdf7AUBPd/Ynm
+SUPER_PASSWORD_HASH=$2a$10$OgBR42R6LC1rgHkoihKZkOeCqGKCv3eNz5FdtqZT.Kz14gtWwKfQC
+
+SESSION_SECRET=anotherSecretKey
+
+
+
+CLOUDINARY_CLOUD_NAME=daeekyrp8
+CLOUDINARY_API_KEY=591742275297713
+CLOUDINARY_API_SECRET=PJEXIA6xEbVqrjV8-44GarsIyD8
+
+CLEANUP_SCHEDULE='*/10 * * * *'
+
+# Test Razorpay
+RAZORPAY_KEY_ID=rzp_test_TmmbARIwlAEaSr
+RAZORPAY_KEY_SECRET=Qt7YeHhbmoJHQtd0HmDpLOEb
+RAZORPAY_WEBHOOK_SECRET=uVaTjt5dnv32b6j
+
+# Live Razorpay
+# RAZORPAY_KEY_ID=rzp_live_xzfSy8Kb40GCP9
+# RAZORPAY_KEY_SECRET=Qt7YeHhbmoJHQtd0HmDpLOEb
+# RAZORPAY_WEBHOOK_SECRET=uVaTjt5dnv32b6j
+
+# WhatsApp Cloud API Configuration
+WHATSAPP_ACCESS_TOKEN=EAAJZBaGUpzfABO3CnPSOe7IkZCRZCnlEliHJnftXmWIDHUW4i4V3OdH38Lr50chb1BRz4WDWhAb0nMZCn22SYryOP6BXcFDZA7b3bIot1I6Dkjtb8iuzlXQ3nLjROvhOm8pIUfOKJUNhedmXZCB5pCcoQVOuu1lZCkfZA8BmlwXEypgQ3VVscYZAr19mbpFugvAyQBCMN3eDzmfioMRmFiVYQTZB0z9tQZD
+WHATSAPP_PHONE_NUMBER_ID=641017722426715
+WHATSAPP_BUSINESS_ACCOUNT_ID=1509642503773943
+WHATSAPP_WEBHOOK_VERIFY_TOKEN=
+WHATSAPP_API_VERSION=v22.0
+
+# Hospital Info
+HOSPITAL_NAME="SHREE JAGANNATH Hospital & Research Centre"
+HOSPITAL_CONTACT="+91 8987999200"
+HOSPITAL_LOCATION="Ranchi"

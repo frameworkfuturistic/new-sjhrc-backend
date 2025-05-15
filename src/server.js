@@ -4,7 +4,7 @@ const cors = require('cors');
 const helmet = require('helmet');
 const xss = require('xss-clean');
 const hpp = require('hpp');
-const rateLimit = require('express-rate-limit');
+// const rateLimit = require('express-rate-limit');
 const morgan = require('morgan');
 const path = require('path');
 const { connectDB } = require('./config/database');
@@ -57,12 +57,12 @@ process.on('uncaughtException', (error) => {
 });
 
 // Rate limiting
-const apiLimiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 100, // limit each IP to 100 requests per windowMs
-  message: 'Too many requests, please try again later.',
-});
-app.use(apiLimiter);
+// const apiLimiter = rateLimit({
+//   windowMs: 15 * 60 * 1000, // 15 minutes
+//   max: 100, // limit each IP to 100 requests per windowMs
+//   message: 'Too many requests, please try again later.',
+// });
+// app.use(apiLimiter);
 
 // Body parser
 app.use(express.json());

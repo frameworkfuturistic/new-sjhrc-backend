@@ -1,0 +1,315 @@
+{"level":"info","message":"Cleanup job scheduled with pattern: */10 * * * *","timestamp":"2025-05-14T18:32:13.750Z"}
+{"level":"info","message":"Appointment cleanup job initialized","timestamp":"2025-05-14T18:32:13.753Z"}
+{"level":"info","message":"Server running in development mode on port 5656","timestamp":"2025-05-14T18:32:13.765Z"}
+{"level":"info","message":"Cleanup service status: active","timestamp":"2025-05-14T18:32:13.766Z"}
+{"level":"info","message":"MongoDB Connected...","timestamp":"2025-05-14T18:32:15.122Z"}
+{"level":"info","message":"MySQL Connected...","timestamp":"2025-05-14T18:32:15.254Z"}
+{"level":"info","message":"Cleanup job scheduled with pattern: */10 * * * *","timestamp":"2025-05-14T18:33:09.885Z"}
+{"level":"info","message":"Appointment cleanup job initialized","timestamp":"2025-05-14T18:33:09.894Z"}
+{"level":"info","message":"Server running in development mode on port 5656","timestamp":"2025-05-14T18:33:09.907Z"}
+{"level":"info","message":"Cleanup service status: active","timestamp":"2025-05-14T18:33:09.911Z"}
+{"level":"info","message":"MongoDB Connected...","timestamp":"2025-05-14T18:33:10.973Z"}
+{"level":"info","message":"MySQL Connected...","timestamp":"2025-05-14T18:33:11.068Z"}
+{"level":"info","message":"Cleanup completed: 0 appointments processed","timestamp":"2025-05-14T18:40:00.699Z"}
+{"level":"error","message":"Invalid credentials","method":"POST","stack":"Error: Invalid credentials\n    at exports.login (F:\\WORKSPACE-OFFICE\\SJHRC RANCHI\\Production\\15MAY25\\new-sjhrc-backend\\src\\controllers\\authController.js:24:17)\n    at Layer.handle [as handle_request] (F:\\WORKSPACE-OFFICE\\SJHRC RANCHI\\Production\\15MAY25\\new-sjhrc-backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at next (F:\\WORKSPACE-OFFICE\\SJHRC RANCHI\\Production\\15MAY25\\new-sjhrc-backend\\node_modules\\express\\lib\\router\\route.js:149:13)\n    at Route.dispatch (F:\\WORKSPACE-OFFICE\\SJHRC RANCHI\\Production\\15MAY25\\new-sjhrc-backend\\node_modules\\express\\lib\\router\\route.js:119:3)\n    at Layer.handle [as handle_request] (F:\\WORKSPACE-OFFICE\\SJHRC RANCHI\\Production\\15MAY25\\new-sjhrc-backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at F:\\WORKSPACE-OFFICE\\SJHRC RANCHI\\Production\\15MAY25\\new-sjhrc-backend\\node_modules\\express\\lib\\router\\index.js:284:15\n    at Function.process_params (F:\\WORKSPACE-OFFICE\\SJHRC RANCHI\\Production\\15MAY25\\new-sjhrc-backend\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (F:\\WORKSPACE-OFFICE\\SJHRC RANCHI\\Production\\15MAY25\\new-sjhrc-backend\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at Function.handle (F:\\WORKSPACE-OFFICE\\SJHRC RANCHI\\Production\\15MAY25\\new-sjhrc-backend\\node_modules\\express\\lib\\router\\index.js:175:3)\n    at router (F:\\WORKSPACE-OFFICE\\SJHRC RANCHI\\Production\\15MAY25\\new-sjhrc-backend\\node_modules\\express\\lib\\router\\index.js:47:12)","timestamp":"2025-05-14T18:44:13.032Z","url":"/api/auth/login"}
+{"level":"info","message":"Cleanup completed: 0 appointments processed","timestamp":"2025-05-14T18:50:00.519Z"}
+{"level":"info","message":"Cleanup job scheduled with pattern: */10 * * * *","timestamp":"2025-05-14T18:58:44.097Z"}
+{"level":"info","message":"Appointment cleanup job initialized","timestamp":"2025-05-14T18:58:44.101Z"}
+{"level":"info","message":"Server running in development mode on port 5656","timestamp":"2025-05-14T18:58:44.112Z"}
+{"level":"info","message":"Cleanup service status: active","timestamp":"2025-05-14T18:58:44.112Z"}
+{"level":"info","message":"MongoDB Connected...","timestamp":"2025-05-14T18:58:46.076Z"}
+{"level":"info","message":"MySQL Connected...","timestamp":"2025-05-14T18:58:46.259Z"}
+{"level":"info","message":"Cleanup job scheduled with pattern: */10 * * * *","timestamp":"2025-05-14T18:59:37.971Z"}
+{"level":"info","message":"Appointment cleanup job initialized","timestamp":"2025-05-14T18:59:37.975Z"}
+{"level":"info","message":"Server running in development mode on port 5656","timestamp":"2025-05-14T18:59:37.984Z"}
+{"level":"info","message":"Cleanup service status: active","timestamp":"2025-05-14T18:59:37.986Z"}
+{"level":"info","message":"MongoDB Connected...","timestamp":"2025-05-14T18:59:38.910Z"}
+{"level":"info","message":"MySQL Connected...","timestamp":"2025-05-14T18:59:38.933Z"}
+{"level":"info","message":"Cleanup completed: 0 appointments processed","timestamp":"2025-05-14T19:00:00.223Z"}
+{"level":"info","message":"Cleanup job scheduled with pattern: */10 * * * *","timestamp":"2025-05-14T19:02:28.610Z"}
+{"level":"info","message":"Appointment cleanup job initialized","timestamp":"2025-05-14T19:02:28.613Z"}
+{"level":"info","message":"Server running in development mode on port 5656","timestamp":"2025-05-14T19:02:28.619Z"}
+{"level":"info","message":"Cleanup service status: active","timestamp":"2025-05-14T19:02:28.619Z"}
+{"level":"info","message":"MongoDB Connected...","timestamp":"2025-05-14T19:02:30.427Z"}
+{"level":"info","message":"MySQL Connected...","timestamp":"2025-05-14T19:02:30.469Z"}
+{"level":"info","message":"Cleanup job scheduled with pattern: */10 * * * *","timestamp":"2025-05-14T19:06:18.048Z"}
+{"level":"info","message":"Appointment cleanup job initialized","timestamp":"2025-05-14T19:06:18.051Z"}
+{"level":"info","message":"Server running in development mode on port 5656","timestamp":"2025-05-14T19:06:18.056Z"}
+{"level":"info","message":"Cleanup service status: active","timestamp":"2025-05-14T19:06:18.056Z"}
+{"level":"info","message":"MongoDB Connected...","timestamp":"2025-05-14T19:06:19.199Z"}
+{"level":"info","message":"MySQL Connected...","timestamp":"2025-05-14T19:06:19.245Z"}
+{"level":"info","message":"Cleanup job scheduled with pattern: */10 * * * *","timestamp":"2025-05-14T19:06:29.292Z"}
+{"level":"info","message":"Appointment cleanup job initialized","timestamp":"2025-05-14T19:06:29.297Z"}
+{"level":"info","message":"Server running in development mode on port 5656","timestamp":"2025-05-14T19:06:29.306Z"}
+{"level":"info","message":"Cleanup service status: active","timestamp":"2025-05-14T19:06:29.307Z"}
+{"level":"info","message":"MongoDB Connected...","timestamp":"2025-05-14T19:06:30.178Z"}
+{"level":"info","message":"MySQL Connected...","timestamp":"2025-05-14T19:06:30.207Z"}
+{"level":"info","message":"Cleanup job scheduled with pattern: */10 * * * *","timestamp":"2025-05-14T19:06:51.935Z"}
+{"level":"info","message":"Appointment cleanup job initialized","timestamp":"2025-05-14T19:06:51.941Z"}
+{"level":"info","message":"Server running in development mode on port 5656","timestamp":"2025-05-14T19:06:51.953Z"}
+{"level":"info","message":"Cleanup service status: active","timestamp":"2025-05-14T19:06:51.954Z"}
+{"level":"info","message":"MongoDB Connected...","timestamp":"2025-05-14T19:06:52.932Z"}
+{"level":"info","message":"MySQL Connected...","timestamp":"2025-05-14T19:06:52.981Z"}
+{"level":"info","message":"Cleanup completed: 0 appointments processed","timestamp":"2025-05-14T19:10:00.583Z"}
+{"level":"info","message":"Cleanup completed: 0 appointments processed","timestamp":"2025-05-14T19:20:00.676Z"}
+{"level":"info","message":"Cleanup completed: 0 appointments processed","timestamp":"2025-05-14T19:30:01.032Z"}
+{"level":"info","message":"Cleanup job scheduled with pattern: */10 * * * *","timestamp":"2025-05-14T19:34:20.096Z"}
+{"level":"info","message":"Appointment cleanup job initialized","timestamp":"2025-05-14T19:34:20.115Z"}
+{"level":"info","message":"Server running in development mode on port 5656","timestamp":"2025-05-14T19:34:20.157Z"}
+{"level":"info","message":"Cleanup service status: active","timestamp":"2025-05-14T19:34:20.159Z"}
+{"level":"info","message":"MongoDB Connected...","timestamp":"2025-05-14T19:34:22.215Z"}
+{"level":"info","message":"MySQL Connected...","timestamp":"2025-05-14T19:34:22.495Z"}
+{"level":"info","message":"Cleanup job scheduled with pattern: */10 * * * *","timestamp":"2025-05-14T19:37:02.950Z"}
+{"level":"info","message":"Appointment cleanup job initialized","timestamp":"2025-05-14T19:37:02.954Z"}
+{"level":"info","message":"Server running in development mode on port 5656","timestamp":"2025-05-14T19:37:02.961Z"}
+{"level":"info","message":"Cleanup service status: active","timestamp":"2025-05-14T19:37:02.962Z"}
+{"level":"info","message":"MongoDB Connected...","timestamp":"2025-05-14T19:37:05.121Z"}
+{"level":"info","message":"MySQL Connected...","timestamp":"2025-05-14T19:37:05.263Z"}
+{"level":"info","message":"Cleanup job scheduled with pattern: */10 * * * *","timestamp":"2025-05-14T19:37:49.277Z"}
+{"level":"info","message":"Appointment cleanup job initialized","timestamp":"2025-05-14T19:37:49.281Z"}
+{"level":"info","message":"Server running in development mode on port 5656","timestamp":"2025-05-14T19:37:49.289Z"}
+{"level":"info","message":"Cleanup service status: active","timestamp":"2025-05-14T19:37:49.289Z"}
+{"level":"info","message":"MongoDB Connected...","timestamp":"2025-05-14T19:37:51.265Z"}
+{"level":"info","message":"MySQL Connected...","timestamp":"2025-05-14T19:37:51.368Z"}
+{"level":"info","message":"Cleanup job scheduled with pattern: */10 * * * *","timestamp":"2025-05-14T19:37:57.203Z"}
+{"level":"info","message":"Appointment cleanup job initialized","timestamp":"2025-05-14T19:37:57.212Z"}
+{"level":"info","message":"Server running in development mode on port 5656","timestamp":"2025-05-14T19:37:57.230Z"}
+{"level":"info","message":"Cleanup service status: active","timestamp":"2025-05-14T19:37:57.235Z"}
+{"level":"info","message":"Cleanup job scheduled with pattern: */10 * * * *","timestamp":"2025-05-14T19:38:00.157Z"}
+{"level":"info","message":"Appointment cleanup job initialized","timestamp":"2025-05-14T19:38:00.161Z"}
+{"level":"info","message":"Server running in development mode on port 5656","timestamp":"2025-05-14T19:38:00.168Z"}
+{"level":"info","message":"Cleanup service status: active","timestamp":"2025-05-14T19:38:00.169Z"}
+{"level":"info","message":"MongoDB Connected...","timestamp":"2025-05-14T19:38:01.485Z"}
+{"level":"info","message":"MySQL Connected...","timestamp":"2025-05-14T19:38:01.602Z"}
+{"level":"info","message":"Cleanup job scheduled with pattern: */10 * * * *","timestamp":"2025-05-14T19:39:05.273Z"}
+{"level":"info","message":"Appointment cleanup job initialized","timestamp":"2025-05-14T19:39:05.277Z"}
+{"level":"info","message":"Server running in development mode on port 5656","timestamp":"2025-05-14T19:39:05.286Z"}
+{"level":"info","message":"Cleanup service status: active","timestamp":"2025-05-14T19:39:05.286Z"}
+{"level":"info","message":"MongoDB Connected...","timestamp":"2025-05-14T19:39:06.916Z"}
+{"level":"info","message":"MySQL Connected...","timestamp":"2025-05-14T19:39:07.048Z"}
+{"level":"info","message":"Cleanup job scheduled with pattern: */10 * * * *","timestamp":"2025-05-14T19:39:31.442Z"}
+{"level":"info","message":"Appointment cleanup job initialized","timestamp":"2025-05-14T19:39:31.450Z"}
+{"level":"info","message":"Server running in development mode on port 5656","timestamp":"2025-05-14T19:39:31.459Z"}
+{"level":"info","message":"Cleanup service status: active","timestamp":"2025-05-14T19:39:31.460Z"}
+{"level":"info","message":"MongoDB Connected...","timestamp":"2025-05-14T19:39:32.929Z"}
+{"level":"info","message":"MySQL Connected...","timestamp":"2025-05-14T19:39:33.060Z"}
+{"level":"info","message":"Cleanup completed: 0 appointments processed","timestamp":"2025-05-14T19:40:00.852Z"}
+{"level":"info","message":"Cleanup job scheduled with pattern: */10 * * * *","timestamp":"2025-05-14T19:41:06.986Z"}
+{"level":"info","message":"Appointment cleanup job initialized","timestamp":"2025-05-14T19:41:06.991Z"}
+{"level":"info","message":"Server running in development mode on port 5656","timestamp":"2025-05-14T19:41:07.001Z"}
+{"level":"info","message":"Cleanup service status: active","timestamp":"2025-05-14T19:41:07.002Z"}
+{"level":"info","message":"MongoDB Connected...","timestamp":"2025-05-14T19:41:08.591Z"}
+{"level":"info","message":"MySQL Connected...","timestamp":"2025-05-14T19:41:08.738Z"}
+{"level":"info","message":"Cleanup job scheduled with pattern: */10 * * * *","timestamp":"2025-05-14T19:41:37.017Z"}
+{"level":"info","message":"Appointment cleanup job initialized","timestamp":"2025-05-14T19:41:37.021Z"}
+{"level":"info","message":"Server running in development mode on port 5656","timestamp":"2025-05-14T19:41:37.029Z"}
+{"level":"info","message":"Cleanup service status: active","timestamp":"2025-05-14T19:41:37.029Z"}
+{"level":"info","message":"MongoDB Connected...","timestamp":"2025-05-14T19:41:38.176Z"}
+{"level":"info","message":"MySQL Connected...","timestamp":"2025-05-14T19:41:38.265Z"}
+{"level":"info","message":"Cleanup job scheduled with pattern: */10 * * * *","timestamp":"2025-05-14T19:44:21.364Z"}
+{"level":"info","message":"Appointment cleanup job initialized","timestamp":"2025-05-14T19:44:21.369Z"}
+{"level":"info","message":"Server running in development mode on port 5656","timestamp":"2025-05-14T19:44:21.376Z"}
+{"level":"info","message":"Cleanup service status: active","timestamp":"2025-05-14T19:44:21.377Z"}
+{"level":"info","message":"MongoDB Connected...","timestamp":"2025-05-14T19:44:22.761Z"}
+{"level":"info","message":"MySQL Connected...","timestamp":"2025-05-14T19:44:22.856Z"}
+{"level":"info","message":"Cleanup job scheduled with pattern: */10 * * * *","timestamp":"2025-05-14T19:44:39.748Z"}
+{"level":"info","message":"Appointment cleanup job initialized","timestamp":"2025-05-14T19:44:39.752Z"}
+{"level":"info","message":"Server running in development mode on port 5656","timestamp":"2025-05-14T19:44:39.758Z"}
+{"level":"info","message":"Cleanup service status: active","timestamp":"2025-05-14T19:44:39.759Z"}
+{"level":"info","message":"MongoDB Connected...","timestamp":"2025-05-14T19:44:40.804Z"}
+{"level":"info","message":"MySQL Connected...","timestamp":"2025-05-14T19:44:40.872Z"}
+{"level":"info","message":"Cleanup job scheduled with pattern: */10 * * * *","timestamp":"2025-05-14T19:44:55.690Z"}
+{"level":"info","message":"Appointment cleanup job initialized","timestamp":"2025-05-14T19:44:55.695Z"}
+{"level":"info","message":"Server running in development mode on port 5656","timestamp":"2025-05-14T19:44:55.702Z"}
+{"level":"info","message":"Cleanup service status: active","timestamp":"2025-05-14T19:44:55.703Z"}
+{"level":"info","message":"MongoDB Connected...","timestamp":"2025-05-14T19:44:57.167Z"}
+{"level":"info","message":"MySQL Connected...","timestamp":"2025-05-14T19:44:57.264Z"}
+{"level":"info","message":"Cleanup job scheduled with pattern: */10 * * * *","timestamp":"2025-05-14T19:48:01.971Z"}
+{"level":"info","message":"Appointment cleanup job initialized","timestamp":"2025-05-14T19:48:01.979Z"}
+{"level":"info","message":"Server running in development mode on port 5656","timestamp":"2025-05-14T19:48:01.996Z"}
+{"level":"info","message":"Cleanup service status: active","timestamp":"2025-05-14T19:48:01.997Z"}
+{"level":"info","message":"MongoDB Connected...","timestamp":"2025-05-14T19:48:03.538Z"}
+{"level":"info","message":"MySQL Connected...","timestamp":"2025-05-14T19:48:03.724Z"}
+{"level":"info","message":"Cleanup job scheduled with pattern: */10 * * * *","timestamp":"2025-05-14T19:49:30.440Z"}
+{"level":"info","message":"Appointment cleanup job initialized","timestamp":"2025-05-14T19:49:30.445Z"}
+{"level":"info","message":"Server running in development mode on port 5656","timestamp":"2025-05-14T19:49:30.452Z"}
+{"level":"info","message":"Cleanup service status: active","timestamp":"2025-05-14T19:49:30.453Z"}
+{"level":"info","message":"MongoDB Connected...","timestamp":"2025-05-14T19:49:32.121Z"}
+{"level":"info","message":"MySQL Connected...","timestamp":"2025-05-14T19:49:32.171Z"}
+{"level":"info","message":"Cleanup job scheduled with pattern: */10 * * * *","timestamp":"2025-05-14T19:49:45.475Z"}
+{"level":"info","message":"Appointment cleanup job initialized","timestamp":"2025-05-14T19:49:45.482Z"}
+{"level":"info","message":"Server running in development mode on port 5656","timestamp":"2025-05-14T19:49:45.495Z"}
+{"level":"info","message":"Cleanup service status: active","timestamp":"2025-05-14T19:49:45.496Z"}
+{"level":"info","message":"MongoDB Connected...","timestamp":"2025-05-14T19:49:46.599Z"}
+{"level":"info","message":"MySQL Connected...","timestamp":"2025-05-14T19:49:46.710Z"}
+{"level":"info","message":"Cleanup completed: 0 appointments processed","timestamp":"2025-05-14T19:50:00.798Z"}
+{"level":"info","message":"Cleanup job scheduled with pattern: */10 * * * *","timestamp":"2025-05-14T19:52:29.107Z"}
+{"level":"info","message":"Appointment cleanup job initialized","timestamp":"2025-05-14T19:52:29.112Z"}
+{"level":"info","message":"Server running in development mode on port 5656","timestamp":"2025-05-14T19:52:29.119Z"}
+{"level":"info","message":"Cleanup service status: active","timestamp":"2025-05-14T19:52:29.120Z"}
+{"level":"info","message":"MongoDB Connected...","timestamp":"2025-05-14T19:52:30.452Z"}
+{"level":"info","message":"MySQL Connected...","timestamp":"2025-05-14T19:52:30.553Z"}
+{"level":"info","message":"Cleanup job scheduled with pattern: */10 * * * *","timestamp":"2025-05-14T19:52:43.006Z"}
+{"level":"info","message":"Appointment cleanup job initialized","timestamp":"2025-05-14T19:52:43.016Z"}
+{"level":"info","message":"Server running in development mode on port 5656","timestamp":"2025-05-14T19:52:43.028Z"}
+{"level":"info","message":"Cleanup service status: active","timestamp":"2025-05-14T19:52:43.030Z"}
+{"level":"info","message":"MongoDB Connected...","timestamp":"2025-05-14T19:52:44.551Z"}
+{"level":"info","message":"MySQL Connected...","timestamp":"2025-05-14T19:52:44.643Z"}
+{"level":"info","message":"Stopping cleanup job gracefully...","timestamp":"2025-05-14T19:53:29.519Z"}
+{"level":"info","message":"Cleanup job scheduled with pattern: */10 * * * *","timestamp":"2025-05-14T19:53:36.866Z"}
+{"level":"info","message":"Appointment cleanup job initialized","timestamp":"2025-05-14T19:53:36.872Z"}
+{"level":"info","message":"Server running in development mode on port 5656","timestamp":"2025-05-14T19:53:36.878Z"}
+{"level":"info","message":"Cleanup service status: active","timestamp":"2025-05-14T19:53:36.879Z"}
+{"level":"info","message":"MongoDB Connected...","timestamp":"2025-05-14T19:53:38.195Z"}
+{"level":"info","message":"MySQL Connected...","timestamp":"2025-05-14T19:53:38.233Z"}
+{"level":"info","message":"Cleanup job scheduled with pattern: */10 * * * *","timestamp":"2025-05-14T19:55:09.813Z"}
+{"level":"info","message":"Appointment cleanup job initialized","timestamp":"2025-05-14T19:55:09.817Z"}
+{"level":"info","message":"Server running in development mode on port 5656","timestamp":"2025-05-14T19:55:09.825Z"}
+{"level":"info","message":"Cleanup service status: active","timestamp":"2025-05-14T19:55:09.825Z"}
+{"level":"info","message":"MongoDB Connected...","timestamp":"2025-05-14T19:55:12.028Z"}
+{"level":"info","message":"MySQL Connected...","timestamp":"2025-05-14T19:55:12.081Z"}
+{"code":"ER_BAD_FIELD_ERROR","errno":1054,"level":"error","message":"Error finding slots for consultant reschedule: Unknown column 'NaN' in 'where clause'","sql":"SELECT * FROM gen_onlineslots \n        WHERE ConsultantID = NaN AND IsActive = TRUE\n        ORDER BY SlotDate ASC, SlotTime ASC","sqlMessage":"Unknown column 'NaN' in 'where clause'","sqlState":"42S22","stack":"Error: Unknown column 'NaN' in 'where clause'\n    at PromisePool.query (F:\\WORKSPACE-OFFICE\\SJHRC RANCHI\\Production\\15MAY25\\new-sjhrc-backend\\node_modules\\mysql2\\lib\\promise\\pool.js:36:22)\n    at TimeSlot.findAllByConsultant (F:\\WORKSPACE-OFFICE\\SJHRC RANCHI\\Production\\15MAY25\\new-sjhrc-backend\\src\\models\\symptom\\TimeSlot.js:83:39)\n    at exports.getAllDoctorSlots (F:\\WORKSPACE-OFFICE\\SJHRC RANCHI\\Production\\15MAY25\\new-sjhrc-backend\\src\\controllers\\symptom\\slotController.js:355:34)\n    at Layer.handle [as handle_request] (F:\\WORKSPACE-OFFICE\\SJHRC RANCHI\\Production\\15MAY25\\new-sjhrc-backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at next (F:\\WORKSPACE-OFFICE\\SJHRC RANCHI\\Production\\15MAY25\\new-sjhrc-backend\\node_modules\\express\\lib\\router\\route.js:149:13)\n    at middleware (F:\\WORKSPACE-OFFICE\\SJHRC RANCHI\\Production\\15MAY25\\new-sjhrc-backend\\node_modules\\express-validator\\lib\\middlewares\\check.js:16:13)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)","timestamp":"2025-05-14T19:56:51.627Z"}
+{"code":"ER_BAD_FIELD_ERROR","errno":1054,"level":"error","message":"Error fetching doctor slots: Unknown column 'NaN' in 'where clause'","sql":"SELECT * FROM gen_onlineslots \n        WHERE ConsultantID = NaN AND IsActive = TRUE\n        ORDER BY SlotDate ASC, SlotTime ASC","sqlMessage":"Unknown column 'NaN' in 'where clause'","sqlState":"42S22","stack":"Error: Unknown column 'NaN' in 'where clause'\n    at PromisePool.query (F:\\WORKSPACE-OFFICE\\SJHRC RANCHI\\Production\\15MAY25\\new-sjhrc-backend\\node_modules\\mysql2\\lib\\promise\\pool.js:36:22)\n    at TimeSlot.findAllByConsultant (F:\\WORKSPACE-OFFICE\\SJHRC RANCHI\\Production\\15MAY25\\new-sjhrc-backend\\src\\models\\symptom\\TimeSlot.js:83:39)\n    at exports.getAllDoctorSlots (F:\\WORKSPACE-OFFICE\\SJHRC RANCHI\\Production\\15MAY25\\new-sjhrc-backend\\src\\controllers\\symptom\\slotController.js:355:34)\n    at Layer.handle [as handle_request] (F:\\WORKSPACE-OFFICE\\SJHRC RANCHI\\Production\\15MAY25\\new-sjhrc-backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at next (F:\\WORKSPACE-OFFICE\\SJHRC RANCHI\\Production\\15MAY25\\new-sjhrc-backend\\node_modules\\express\\lib\\router\\route.js:149:13)\n    at middleware (F:\\WORKSPACE-OFFICE\\SJHRC RANCHI\\Production\\15MAY25\\new-sjhrc-backend\\node_modules\\express-validator\\lib\\middlewares\\check.js:16:13)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)","timestamp":"2025-05-14T19:56:51.634Z"}
+{"level":"info","message":"Cleanup job scheduled with pattern: */10 * * * *","timestamp":"2025-05-14T19:58:14.339Z"}
+{"level":"info","message":"Appointment cleanup job initialized","timestamp":"2025-05-14T19:58:14.343Z"}
+{"level":"info","message":"Server running in development mode on port 5656","timestamp":"2025-05-14T19:58:14.350Z"}
+{"level":"info","message":"Cleanup service status: active","timestamp":"2025-05-14T19:58:14.351Z"}
+{"level":"info","message":"MongoDB Connected...","timestamp":"2025-05-14T19:58:16.180Z"}
+{"level":"info","message":"MySQL Connected...","timestamp":"2025-05-14T19:58:16.365Z"}
+{"level":"info","message":"Cleanup job scheduled with pattern: */10 * * * *","timestamp":"2025-05-14T19:58:58.395Z"}
+{"level":"info","message":"Appointment cleanup job initialized","timestamp":"2025-05-14T19:58:58.401Z"}
+{"level":"info","message":"Server running in development mode on port 5656","timestamp":"2025-05-14T19:58:58.412Z"}
+{"level":"info","message":"Cleanup service status: active","timestamp":"2025-05-14T19:58:58.413Z"}
+{"level":"info","message":"MongoDB Connected...","timestamp":"2025-05-14T19:59:00.225Z"}
+{"level":"info","message":"MySQL Connected...","timestamp":"2025-05-14T19:59:00.310Z"}
+{"level":"info","message":"Cleanup job scheduled with pattern: */10 * * * *","timestamp":"2025-05-14T19:59:31.090Z"}
+{"level":"info","message":"Appointment cleanup job initialized","timestamp":"2025-05-14T19:59:31.096Z"}
+{"level":"info","message":"Server running in development mode on port 5656","timestamp":"2025-05-14T19:59:31.107Z"}
+{"level":"info","message":"Cleanup service status: active","timestamp":"2025-05-14T19:59:31.107Z"}
+{"level":"info","message":"MongoDB Connected...","timestamp":"2025-05-14T19:59:32.326Z"}
+{"level":"info","message":"MySQL Connected...","timestamp":"2025-05-14T19:59:32.384Z"}
+{"level":"info","message":"Cleanup completed: 0 appointments processed","timestamp":"2025-05-14T20:00:00.461Z"}
+{"level":"info","message":"Cleanup job scheduled with pattern: */10 * * * *","timestamp":"2025-05-14T20:00:12.342Z"}
+{"level":"info","message":"Appointment cleanup job initialized","timestamp":"2025-05-14T20:00:12.348Z"}
+{"level":"info","message":"Server running in development mode on port 5656","timestamp":"2025-05-14T20:00:12.355Z"}
+{"level":"info","message":"Cleanup service status: active","timestamp":"2025-05-14T20:00:12.356Z"}
+{"level":"info","message":"MongoDB Connected...","timestamp":"2025-05-14T20:00:13.937Z"}
+{"level":"info","message":"MySQL Connected...","timestamp":"2025-05-14T20:00:14.066Z"}
+{"level":"info","message":"Cleanup job scheduled with pattern: */10 * * * *","timestamp":"2025-05-14T20:00:30.776Z"}
+{"level":"info","message":"Appointment cleanup job initialized","timestamp":"2025-05-14T20:00:30.781Z"}
+{"level":"info","message":"Server running in development mode on port 5656","timestamp":"2025-05-14T20:00:30.788Z"}
+{"level":"info","message":"Cleanup service status: active","timestamp":"2025-05-14T20:00:30.789Z"}
+{"level":"info","message":"MongoDB Connected...","timestamp":"2025-05-14T20:00:32.452Z"}
+{"level":"info","message":"MySQL Connected...","timestamp":"2025-05-14T20:00:32.575Z"}
+{"level":"info","message":"Cleanup job scheduled with pattern: */10 * * * *","timestamp":"2025-05-14T20:00:49.394Z"}
+{"level":"info","message":"Appointment cleanup job initialized","timestamp":"2025-05-14T20:00:49.398Z"}
+{"level":"info","message":"Server running in development mode on port 5656","timestamp":"2025-05-14T20:00:49.403Z"}
+{"level":"info","message":"Cleanup service status: active","timestamp":"2025-05-14T20:00:49.404Z"}
+{"level":"info","message":"MongoDB Connected...","timestamp":"2025-05-14T20:00:50.502Z"}
+{"level":"info","message":"MySQL Connected...","timestamp":"2025-05-14T20:00:50.615Z"}
+{"level":"error","message":"Cannot read properties of undefined (reading 'length')","method":"GET","stack":"TypeError: Cannot read properties of undefined (reading 'length')\n    at StandardValidation.isDate [as validator] (F:\\WORKSPACE-OFFICE\\SJHRC RANCHI\\Production\\15MAY25\\new-sjhrc-backend\\node_modules\\validator\\lib\\isDate.js:86:19)\n    at F:\\WORKSPACE-OFFICE\\SJHRC RANCHI\\Production\\15MAY25\\new-sjhrc-backend\\node_modules\\express-validator\\lib\\context-items\\standard-validation.js:18:33\n    at Array.forEach (<anonymous>)\n    at StandardValidation.run (F:\\WORKSPACE-OFFICE\\SJHRC RANCHI\\Production\\15MAY25\\new-sjhrc-backend\\node_modules\\express-validator\\lib\\context-items\\standard-validation.js:17:16)\n    at F:\\WORKSPACE-OFFICE\\SJHRC RANCHI\\Production\\15MAY25\\new-sjhrc-backend\\node_modules\\express-validator\\lib\\chain\\context-runner-impl.js:41:39\n    at Array.map (<anonymous>)\n    at ContextRunnerImpl.run (F:\\WORKSPACE-OFFICE\\SJHRC RANCHI\\Production\\15MAY25\\new-sjhrc-backend\\node_modules\\express-validator\\lib\\chain\\context-runner-impl.js:34:70)\n    at middleware (F:\\WORKSPACE-OFFICE\\SJHRC RANCHI\\Production\\15MAY25\\new-sjhrc-backend\\node_modules\\express-validator\\lib\\middlewares\\check.js:15:26)\n    at Layer.handle [as handle_request] (F:\\WORKSPACE-OFFICE\\SJHRC RANCHI\\Production\\15MAY25\\new-sjhrc-backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at next (F:\\WORKSPACE-OFFICE\\SJHRC RANCHI\\Production\\15MAY25\\new-sjhrc-backend\\node_modules\\express\\lib\\router\\route.js:149:13)","timestamp":"2025-05-14T20:01:16.120Z","url":"/api/slots/reschedule/1233"}
+{"level":"info","message":"Cleanup job scheduled with pattern: */10 * * * *","timestamp":"2025-05-14T20:02:15.586Z"}
+{"level":"info","message":"Appointment cleanup job initialized","timestamp":"2025-05-14T20:02:15.591Z"}
+{"level":"info","message":"Server running in development mode on port 5656","timestamp":"2025-05-14T20:02:15.599Z"}
+{"level":"info","message":"Cleanup service status: active","timestamp":"2025-05-14T20:02:15.600Z"}
+{"level":"info","message":"MongoDB Connected...","timestamp":"2025-05-14T20:02:18.176Z"}
+{"level":"info","message":"MySQL Connected...","timestamp":"2025-05-14T20:02:18.301Z"}
+{"level":"info","message":"Cleanup job scheduled with pattern: */10 * * * *","timestamp":"2025-05-14T20:02:23.412Z"}
+{"level":"info","message":"Appointment cleanup job initialized","timestamp":"2025-05-14T20:02:23.417Z"}
+{"level":"info","message":"Server running in development mode on port 5656","timestamp":"2025-05-14T20:02:23.425Z"}
+{"level":"info","message":"Cleanup service status: active","timestamp":"2025-05-14T20:02:23.426Z"}
+{"level":"info","message":"MongoDB Connected...","timestamp":"2025-05-14T20:02:25.360Z"}
+{"level":"info","message":"MySQL Connected...","timestamp":"2025-05-14T20:02:25.485Z"}
+{"level":"info","message":"Cleanup job scheduled with pattern: */10 * * * *","timestamp":"2025-05-14T20:08:27.456Z"}
+{"level":"info","message":"Appointment cleanup job initialized","timestamp":"2025-05-14T20:08:27.462Z"}
+{"level":"info","message":"Server running in development mode on port 5656","timestamp":"2025-05-14T20:08:27.475Z"}
+{"level":"info","message":"Cleanup service status: active","timestamp":"2025-05-14T20:08:27.475Z"}
+{"level":"info","message":"MongoDB Connected...","timestamp":"2025-05-14T20:08:28.986Z"}
+{"level":"info","message":"MySQL Connected...","timestamp":"2025-05-14T20:08:29.129Z"}
+{"level":"info","message":"Stopping cleanup job gracefully...","timestamp":"2025-05-14T20:08:31.307Z"}
+{"level":"info","message":"Cleanup job scheduled with pattern: */10 * * * *","timestamp":"2025-05-14T20:08:36.802Z"}
+{"level":"info","message":"Appointment cleanup job initialized","timestamp":"2025-05-14T20:08:36.805Z"}
+{"level":"info","message":"Server running in development mode on port 5656","timestamp":"2025-05-14T20:08:36.810Z"}
+{"level":"info","message":"Cleanup service status: active","timestamp":"2025-05-14T20:08:36.811Z"}
+{"level":"info","message":"MongoDB Connected...","timestamp":"2025-05-14T20:08:37.886Z"}
+{"level":"info","message":"MySQL Connected...","timestamp":"2025-05-14T20:08:37.994Z"}
+{"level":"error","message":"Invalid token","method":"GET","stack":"Error: Invalid token\n    at protect (F:\\WORKSPACE-OFFICE\\SJHRC RANCHI\\Production\\15MAY25\\new-sjhrc-backend\\src\\middleware\\auth.js:27:19)\n    at Layer.handle [as handle_request] (F:\\WORKSPACE-OFFICE\\SJHRC RANCHI\\Production\\15MAY25\\new-sjhrc-backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at next (F:\\WORKSPACE-OFFICE\\SJHRC RANCHI\\Production\\15MAY25\\new-sjhrc-backend\\node_modules\\express\\lib\\router\\route.js:149:13)\n    at Route.dispatch (F:\\WORKSPACE-OFFICE\\SJHRC RANCHI\\Production\\15MAY25\\new-sjhrc-backend\\node_modules\\express\\lib\\router\\route.js:119:3)\n    at Layer.handle [as handle_request] (F:\\WORKSPACE-OFFICE\\SJHRC RANCHI\\Production\\15MAY25\\new-sjhrc-backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at F:\\WORKSPACE-OFFICE\\SJHRC RANCHI\\Production\\15MAY25\\new-sjhrc-backend\\node_modules\\express\\lib\\router\\index.js:284:15\n    at Function.process_params (F:\\WORKSPACE-OFFICE\\SJHRC RANCHI\\Production\\15MAY25\\new-sjhrc-backend\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (F:\\WORKSPACE-OFFICE\\SJHRC RANCHI\\Production\\15MAY25\\new-sjhrc-backend\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at Function.handle (F:\\WORKSPACE-OFFICE\\SJHRC RANCHI\\Production\\15MAY25\\new-sjhrc-backend\\node_modules\\express\\lib\\router\\index.js:175:3)\n    at router (F:\\WORKSPACE-OFFICE\\SJHRC RANCHI\\Production\\15MAY25\\new-sjhrc-backend\\node_modules\\express\\lib\\router\\index.js:47:12)","timestamp":"2025-05-14T20:08:54.216Z","url":"/api/appointments?page=1&limit=10&startDate=2025-05-15&endDate=2025-05-15"}
+{"level":"info","message":"Cleanup completed: 0 appointments processed","timestamp":"2025-05-14T20:10:00.649Z"}
+{"level":"error","message":"Not authorized to access this route","method":"GET","stack":"Error: Not authorized to access this route\n    at protect (F:\\WORKSPACE-OFFICE\\SJHRC RANCHI\\Production\\15MAY25\\new-sjhrc-backend\\src\\middleware\\auth.js:18:19)\n    at Layer.handle [as handle_request] (F:\\WORKSPACE-OFFICE\\SJHRC RANCHI\\Production\\15MAY25\\new-sjhrc-backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at next (F:\\WORKSPACE-OFFICE\\SJHRC RANCHI\\Production\\15MAY25\\new-sjhrc-backend\\node_modules\\express\\lib\\router\\route.js:149:13)\n    at Route.dispatch (F:\\WORKSPACE-OFFICE\\SJHRC RANCHI\\Production\\15MAY25\\new-sjhrc-backend\\node_modules\\express\\lib\\router\\route.js:119:3)\n    at Layer.handle [as handle_request] (F:\\WORKSPACE-OFFICE\\SJHRC RANCHI\\Production\\15MAY25\\new-sjhrc-backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at F:\\WORKSPACE-OFFICE\\SJHRC RANCHI\\Production\\15MAY25\\new-sjhrc-backend\\node_modules\\express\\lib\\router\\index.js:284:15\n    at Function.process_params (F:\\WORKSPACE-OFFICE\\SJHRC RANCHI\\Production\\15MAY25\\new-sjhrc-backend\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (F:\\WORKSPACE-OFFICE\\SJHRC RANCHI\\Production\\15MAY25\\new-sjhrc-backend\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at Function.handle (F:\\WORKSPACE-OFFICE\\SJHRC RANCHI\\Production\\15MAY25\\new-sjhrc-backend\\node_modules\\express\\lib\\router\\index.js:175:3)\n    at router (F:\\WORKSPACE-OFFICE\\SJHRC RANCHI\\Production\\15MAY25\\new-sjhrc-backend\\node_modules\\express\\lib\\router\\index.js:47:12)","timestamp":"2025-05-14T20:10:17.051Z","url":"/api/appointments?page=1&limit=10&startDate=2025-05-15&endDate=2025-05-15"}
+{"level":"info","message":"Cleanup job scheduled with pattern: */10 * * * *","timestamp":"2025-05-14T20:16:43.163Z"}
+{"level":"info","message":"Appointment cleanup job initialized","timestamp":"2025-05-14T20:16:43.167Z"}
+{"level":"info","message":"Server running in development mode on port 5656","timestamp":"2025-05-14T20:16:43.174Z"}
+{"level":"info","message":"Cleanup service status: active","timestamp":"2025-05-14T20:16:43.175Z"}
+{"level":"info","message":"MongoDB Connected...","timestamp":"2025-05-14T20:16:45.954Z"}
+{"level":"info","message":"MySQL Connected...","timestamp":"2025-05-14T20:16:46.021Z"}
+{"level":"info","message":"Cleanup job scheduled with pattern: */10 * * * *","timestamp":"2025-05-14T20:19:45.909Z"}
+{"level":"info","message":"Appointment cleanup job initialized","timestamp":"2025-05-14T20:19:45.912Z"}
+{"level":"info","message":"Server running in development mode on port 5656","timestamp":"2025-05-14T20:19:45.918Z"}
+{"level":"info","message":"Cleanup service status: active","timestamp":"2025-05-14T20:19:45.918Z"}
+{"level":"info","message":"MongoDB Connected...","timestamp":"2025-05-14T20:19:48.084Z"}
+{"level":"info","message":"MySQL Connected...","timestamp":"2025-05-14T20:19:48.134Z"}
+{"level":"info","message":"Cleanup job scheduled with pattern: */10 * * * *","timestamp":"2025-05-14T20:19:52.894Z"}
+{"level":"info","message":"Appointment cleanup job initialized","timestamp":"2025-05-14T20:19:52.899Z"}
+{"level":"info","message":"Server running in development mode on port 5656","timestamp":"2025-05-14T20:19:52.912Z"}
+{"level":"info","message":"Cleanup service status: active","timestamp":"2025-05-14T20:19:52.913Z"}
+{"level":"info","message":"MongoDB Connected...","timestamp":"2025-05-14T20:19:55.534Z"}
+{"level":"info","message":"MySQL Connected...","timestamp":"2025-05-14T20:19:55.631Z"}
+{"level":"info","message":"Cleanup completed: 0 appointments processed","timestamp":"2025-05-14T20:20:01.043Z"}
+{"level":"info","message":"Cleanup job scheduled with pattern: */10 * * * *","timestamp":"2025-05-14T20:20:08.181Z"}
+{"level":"info","message":"Appointment cleanup job initialized","timestamp":"2025-05-14T20:20:08.185Z"}
+{"level":"info","message":"Server running in development mode on port 5656","timestamp":"2025-05-14T20:20:08.191Z"}
+{"level":"info","message":"Cleanup service status: active","timestamp":"2025-05-14T20:20:08.192Z"}
+{"level":"info","message":"MongoDB Connected...","timestamp":"2025-05-14T20:20:09.632Z"}
+{"level":"info","message":"MySQL Connected...","timestamp":"2025-05-14T20:20:09.716Z"}
+{"level":"info","message":"Cleanup job scheduled with pattern: */10 * * * *","timestamp":"2025-05-14T20:20:24.905Z"}
+{"level":"info","message":"Appointment cleanup job initialized","timestamp":"2025-05-14T20:20:24.914Z"}
+{"level":"info","message":"Server running in development mode on port 5656","timestamp":"2025-05-14T20:20:24.940Z"}
+{"level":"info","message":"Cleanup service status: active","timestamp":"2025-05-14T20:20:24.941Z"}
+{"level":"info","message":"MongoDB Connected...","timestamp":"2025-05-14T20:20:26.100Z"}
+{"level":"info","message":"MySQL Connected...","timestamp":"2025-05-14T20:20:26.187Z"}
+{"level":"info","message":"Cleanup completed: 0 appointments processed","timestamp":"2025-05-14T20:30:00.202Z"}
+{"level":"info","message":"Cleanup completed: 0 appointments processed","timestamp":"2025-05-14T20:40:00.537Z"}
+{"level":"info","message":"Cleanup completed: 0 appointments processed","timestamp":"2025-05-14T20:50:00.511Z"}
+{"level":"info","message":"Cleanup completed: 0 appointments processed","timestamp":"2025-05-14T21:00:00.916Z"}
+{"level":"info","message":"Cleanup completed: 0 appointments processed","timestamp":"2025-05-14T21:10:00.959Z"}
+{"level":"info","message":"Cleanup job scheduled with pattern: */10 * * * *","timestamp":"2025-05-14T21:15:20.666Z"}
+{"level":"info","message":"Appointment cleanup job initialized","timestamp":"2025-05-14T21:15:20.684Z"}
+{"level":"info","message":"Server running in development mode on port 5656","timestamp":"2025-05-14T21:15:20.722Z"}
+{"level":"info","message":"Cleanup service status: active","timestamp":"2025-05-14T21:15:20.725Z"}
+{"level":"info","message":"MongoDB Connected...","timestamp":"2025-05-14T21:15:23.792Z"}
+{"level":"info","message":"MySQL Connected...","timestamp":"2025-05-14T21:15:24.023Z"}
+{"level":"info","message":"Cleanup completed: 0 appointments processed","timestamp":"2025-05-14T21:20:00.080Z"}
+{"level":"info","message":"Cleanup completed: 0 appointments processed","timestamp":"2025-05-14T21:40:01.916Z"}
+{"level":"info","message":"Cleanup completed: 0 appointments processed","timestamp":"2025-05-14T21:50:00.321Z"}
+{"level":"info","message":"Cleanup completed: 0 appointments processed","timestamp":"2025-05-14T22:00:00.908Z"}
+{"level":"info","message":"Cleanup job scheduled with pattern: */10 * * * *","timestamp":"2025-05-15T18:06:56.832Z"}
+{"level":"info","message":"Appointment cleanup job initialized","timestamp":"2025-05-15T18:06:56.836Z"}
+{"level":"info","message":"Server running in development mode on port 5656","timestamp":"2025-05-15T18:06:56.845Z"}
+{"level":"info","message":"Cleanup service status: active","timestamp":"2025-05-15T18:06:56.845Z"}
+{"level":"info","message":"MongoDB Connected...","timestamp":"2025-05-15T18:07:19.808Z"}
+{"level":"info","message":"MySQL Connected...","timestamp":"2025-05-15T18:07:20.275Z"}
+{"level":"info","message":"Cleanup completed: 0 appointments processed","timestamp":"2025-05-15T18:10:00.770Z"}
+{"level":"info","message":"Patient created successfully with MRNo: OL05152340","timestamp":"2025-05-15T18:10:57.854Z"}
+{"level":"info","message":"Cleanup completed: 0 appointments processed","timestamp":"2025-05-15T18:20:00.802Z"}
+{"level":"info","message":"Cleanup completed: 0 appointments processed","timestamp":"2025-05-15T18:30:01.001Z"}
+{"level":"info","message":"Cleanup completed: 0 appointments processed","timestamp":"2025-05-15T18:40:00.223Z"}
+{"level":"info","message":"Cleanup completed: 0 appointments processed","timestamp":"2025-05-15T18:50:00.297Z"}
+{"level":"info","message":"Cleanup completed: 0 appointments processed","timestamp":"2025-05-15T19:00:00.219Z"}
+{"level":"info","message":"Cleanup job scheduled with pattern: */10 * * * *","timestamp":"2025-05-15T19:03:04.989Z"}
+{"level":"info","message":"Appointment cleanup job initialized","timestamp":"2025-05-15T19:03:04.995Z"}
+{"level":"info","message":"Server running in development mode on port 5656","timestamp":"2025-05-15T19:03:05.004Z"}
+{"level":"info","message":"Cleanup service status: active","timestamp":"2025-05-15T19:03:05.004Z"}
+{"level":"info","message":"MongoDB Connected...","timestamp":"2025-05-15T19:03:06.578Z"}
+{"level":"info","message":"Cleanup job scheduled with pattern: */10 * * * *","timestamp":"2025-05-15T19:03:09.139Z"}
+{"level":"info","message":"Appointment cleanup job initialized","timestamp":"2025-05-15T19:03:09.142Z"}
+{"level":"info","message":"Server running in development mode on port 5656","timestamp":"2025-05-15T19:03:09.147Z"}
+{"level":"info","message":"Cleanup service status: active","timestamp":"2025-05-15T19:03:09.147Z"}
+{"level":"info","message":"MongoDB Connected...","timestamp":"2025-05-15T19:03:10.552Z"}
+{"level":"info","message":"MySQL Connected...","timestamp":"2025-05-15T19:03:10.642Z"}
+{"level":"info","message":"Cleanup job scheduled with pattern: */10 * * * *","timestamp":"2025-05-15T19:03:18.129Z"}
+{"level":"info","message":"Appointment cleanup job initialized","timestamp":"2025-05-15T19:03:18.133Z"}
+{"level":"info","message":"Server running in development mode on port 5656","timestamp":"2025-05-15T19:03:18.139Z"}
+{"level":"info","message":"Cleanup service status: active","timestamp":"2025-05-15T19:03:18.139Z"}
+{"level":"info","message":"MongoDB Connected...","timestamp":"2025-05-15T19:03:19.467Z"}
+{"level":"info","message":"MySQL Connected...","timestamp":"2025-05-15T19:03:19.543Z"}
+{"level":"info","message":"Stopping cleanup job gracefully...","timestamp":"2025-05-15T19:03:55.022Z"}
